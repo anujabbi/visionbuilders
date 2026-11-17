@@ -34,8 +34,8 @@ export const FACEBOOK = [
   {
     key: 'nipun',
     name: 'NIPUN',
-    link: 'https://www.facebook.com/share/18YWfixCdv/',
-    plugin: 'https://www.facebook.com/share/18YWfixCdv/', // TODO: replace with full page URL
+    link: 'https://www.facebook.com/NIPUN.NGO',
+    plugin: 'https://www.facebook.com/NIPUN.NGO',
   },
 ];
 
