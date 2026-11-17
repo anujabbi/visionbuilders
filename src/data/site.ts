@@ -16,8 +16,6 @@ export const ORG = {
 // Facebook pages.
 // `link` is used for "Follow us" links. `plugin` must be the page's full
 // facebook.com/<page-name> address for the live feed embed to work.
-// The Kutumb and NIPUN share links below work as links but should be swapped
-// for the full page address: open each link in a browser and copy the URL.
 export const FACEBOOK = [
   {
     key: 'vb',
@@ -28,8 +26,8 @@ export const FACEBOOK = [
   {
     key: 'kutumb',
     name: 'Kutumb',
-    link: 'https://www.facebook.com/share/1AyW8bPd7Z/',
-    plugin: 'https://www.facebook.com/share/1AyW8bPd7Z/', // TODO: replace with full page URL
+    link: 'https://www.facebook.com/kutumbfamily',
+    plugin: 'https://www.facebook.com/kutumbfamily',
   },
   {
     key: 'nipun',

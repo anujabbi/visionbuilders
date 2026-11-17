@@ -36,6 +36,5 @@ npm run build    # outputs to dist/
 3. Add last year's PDF to the `archive` list in `newsletter.astro`.
 
 ## To do
-- Replace the Kutumb Facebook share link in `src/data/site.ts` with each page's full `facebook.com/<page>` address so its live feed loads (open each share link in a browser and copy the address).
 - Replace `public/images/logo.jpg` with the original high-resolution logo.
 - Add earlier newsletters to the archive.
