@@ -1,0 +1,54 @@
+---
+import Base from '../layouts/Base.astro';
+import { ORG } from '../data/site';
+---
+<Base title="Donate" description="Give to Vision Builders by Zelle, PayPal or check. Every gift is tax-deductible.">
+  <section class="page-head">
+    <div class="wrap narrow">
+      <h1>Donate</h1>
+      <p class="lede">Every gift is tax-deductible. Vision Builders is a 501(c)(3), EIN {ORG.ein}, run entirely by volunteers, so your gift goes to the work.</p>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:8px">
+    <div class="wrap">
+      <div class="methods">
+        <div class="method main">
+          <h2>Zelle</h2>
+          <p class="tag">Our preferred way. No fees.</p>
+          <p>In your bank’s app, send your gift to</p>
+          <p class="detail" id="zelle">{ORG.zelle}</p>
+          <button class="copy" type="button" data-copy={ORG.zelle}>Copy email address</button>
+        </div>
+        <div class="method">
+          <h2>PayPal</h2>
+          <p>Give by credit card, debit card or with your PayPal account.</p>
+          <a class="btn btn-primary" href={ORG.paypal} rel="noopener">Donate with PayPal</a>
+        </div>
+        <div class="method">
+          <h2>Check</h2>
+          <p>Make your check payable to {ORG.legalName} and mail it to</p>
+          <p class="detail">{ORG.legalName}<br />{ORG.address[0]}<br />{ORG.address[1]}</p>
+        </div>
+      </div>
+      <div class="narrow" style="margin:0">
+        <p class="small">Need a receipt for a Zelle or check gift? Email <a href={`mailto:${ORG.email}`}>{ORG.email}</a> with your name and the amount.</p>
+        <p class="small">Many employers match their staff’s donations. Ask your HR team, and use our EIN, {ORG.ein}.</p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy]').forEach((b) => {
+    b.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(b.dataset.copy || '');
+        b.textContent = 'Copied';
+        setTimeout(() => (b.textContent = 'Copy email address'), 2000);
+      } catch {
+        b.textContent = 'Select the address above to copy it';
+      }
+    });
+  });
+</script>

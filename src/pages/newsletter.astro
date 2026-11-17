@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import Stats from '../components/Stats.astro';
+import Cta from '../components/Cta.astro';
+import { ORG } from '../data/site';
+
+const pdf = '/newsletters/vision-builders-2026-annual-newsletter.pdf';
+const kutumb: [string, string][] = [
+  ['67', 'children attended Balwadi preschool'],
+  ['136', 'children supported by scholarships'],
+  ['71', 'children at the Sangat Mahavidyalay arts school'],
+  ['8', 'Kutumb graduates in higher education'],
+  ['716', 'women trained in vocational programs'],
+  ['3,820', 'people helped by Clinic on Wheels'],
+  ['4,478', 'people helped by other health programs'],
+];
+const nipun: [string, string][] = [
+  ['402', 'children in the daily nutrition program'],
+  ['128', 'children moved into government schools'],
+  ['25', 'girls on higher-education scholarships'],
+  ['661', 'youth trained at UMANG and UMANG II'],
+  ['454', 'trainees now in jobs or their own business'],
+];
+// Add earlier newsletters here as { year, href } once their PDFs are in /public/newsletters.
+const archive: { year: string; href: string }[] = [];
+---
+<Base title="2026 Annual Newsletter" description="Vision Builders’ 2026 annual newsletter: results from Kutumb in Varanasi and NIPUN in New Delhi.">
+  <section class="page-head">
+    <div class="wrap narrow">
+      <h1>2026 Annual Newsletter</h1>
+      <p class="lede">Vision Builders has continued to help underprivileged children, women and communities through our support of Kutumb and NIPUN. Here is what your gifts did this year.</p>
+      <p class="small">Kutumb figures cover October 2025 to September 2026. NIPUN figures cover November 2025 to October 2026.</p>
+      <div class="links">
+        <a class="btn btn-primary" href={pdf} download>Download the newsletter (PDF, 4 MB)</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <h2>Kutumb, Varanasi</h2>
+      <Stats items={kutumb} compact />
+      <div class="wrap narrow" style="padding:0;margin:24px 0 0">
+        <p>Eight young people who grew up at Kutumb are now in higher education, studying law, technology, nursing, commerce and social work. One has finished her degree and started her career. Clinic on Wheels held 122 camps, and the women’s production unit earned ₹99,000 from its sales.</p>
+        <a class="more" href="/kutumb/">Read the full Kutumb story and meet the graduates</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap">
+      <h2>NIPUN, New Delhi</h2>
+      <Stats items={nipun} compact />
+      <div class="wrap narrow" style="padding:0;margin:24px 0 0">
+        <p>Every child in NIPUN’s nutrition program also attends preschool or remedial classes. UMANG II in Kapashera set out to train 200 girls and women and registered 252, and 176 of them are already earning.</p>
+        <a class="more" href="/nipun/">Read the full NIPUN story and trainees’ stories</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap narrow letter">
+      <h2>A note from Smita</h2>
+      <p>Thank you for helping the children and families in these communities.</p>
+      <p>We are also looking for ways to help children in other parts of the world, especially in Africa. Please share any ideas, and reach out if you’d like to get involved or learn more.</p>
+      <p class="sign">Smita Abbi<br />President, Vision Builders Inc.</p>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap narrow">
+      <h2>Earlier newsletters</h2>
+      {archive.length > 0 ? (
+        <ul>{archive.map((a) => <li><a href={a.href}>{a.year} newsletter</a></li>)}</ul>
+      ) : (
+        <p>Looking for an earlier year? Email <a href={`mailto:${ORG.email}`}>{ORG.email}</a> and we’ll send it.</p>
+      )}
+    </div>
+  </section>
+
+  <Cta />
+</Base>

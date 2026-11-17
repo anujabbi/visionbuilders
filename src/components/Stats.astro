@@ -1,0 +1,12 @@
+---
+interface Props {
+  items: [string, string][];
+  compact?: boolean;
+}
+const { items, compact = false } = Astro.props;
+---
+<ul class:list={['stats', { compact }]}>
+  {items.map(([num, label]) => (
+    <li class="stat"><span class="num">{num}</span><span class="lbl">{label}</span></li>
+  ))}
+</ul>

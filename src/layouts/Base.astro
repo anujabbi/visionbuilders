@@ -1,0 +1,73 @@
+---
+import '../styles/global.css';
+import { ORG, NAV, FACEBOOK } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title,
+  description = 'Vision Builders brings health care, education and job skills to the poorest communities of Varanasi and Delhi, through local leaders who live there.',
+} = Astro.props;
+const pageTitle = title ? `${title} | Vision Builders` : 'Vision Builders | Every child deserves a family, a school and a future';
+const path = Astro.url.pathname.replace(/\/?$/, '/');
+const ogImage = new URL('/images/kids.jpg', Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#1A6E33" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,700..800&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="logo" href="/" aria-label="Vision Builders home"><img src="/images/logo.jpg" alt="Vision Builders" width="224" height="122" /></a>
+      <a class="btn btn-primary btn-small" href="/donate/">Donate</a>
+    </div>
+    <nav class="wrap tabs" aria-label="Main">
+      {NAV.map((item) => (
+        <a class="tab" href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+  </header>
+
+  <main id="main">
+    <slot />
+  </main>
+
+  <footer class="foot" id="contact">
+    <div class="wrap foot-grid">
+      <div>
+        <img src="/images/logo.jpg" alt="Vision Builders" width="224" height="122" loading="lazy" />
+        <p>{ORG.tagline}</p>
+        <p>All-volunteer 501(c)(3), EIN {ORG.ein}.<br />{ORG.address[0]}, {ORG.address[1]}</p>
+      </div>
+      <div>
+        <p><strong>Contact</strong></p>
+        <p><a href={`mailto:${ORG.email}`}>{ORG.email}</a></p>
+        <p><a href="/donate/">Ways to donate</a></p>
+      </div>
+      <div>
+        <p><strong>On Facebook</strong></p>
+        {FACEBOOK.map((f) => <p><a href={f.link} rel="noopener">{f.name}</a></p>)}
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

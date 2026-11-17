@@ -1,0 +1,18 @@
+# Old WordPress addresses -> new pages (Cloudflare Pages reads this file)
+/donate-now/            /donate/        301
+/donate-now             /donate/        301
+/online-donation-form/  /donate/        301
+/kutumb-project/        /kutumb/        301
+/kutumb-project         /kutumb/        301
+/umang-ii-kapersera/    /nipun/         301
+/annual-newsletter/     /newsletter/    301
+/about-us-2/            /               301
+/get-involved/          /donate/        301
+/contact-us/            /#contact       301
+/benefit-event-2014/    /               301
+/benefit-event/         /               301
+/fundraiser-2016/       /               301
+/blog/                  /               301
+/blog/*                 /               301
+/wp-admin/*             /               301
+/wp-content/*           /               301

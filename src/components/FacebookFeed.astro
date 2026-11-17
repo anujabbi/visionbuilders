@@ -1,0 +1,65 @@
+---
+// Live posts from Facebook, using Meta's free Page Plugin.
+// Each tab loads its feed only when chosen, so the page stays fast.
+// If a browser blocks Facebook, visitors still see the "Open on Facebook" link.
+import { FACEBOOK } from '../data/site';
+
+interface Props { only?: string }
+const { only } = Astro.props;
+const pages = only ? FACEBOOK.filter((f) => f.key === only) : FACEBOOK;
+const src = (url: string) =>
+  'https://www.facebook.com/plugins/page.php?' +
+  new URLSearchParams({
+    href: url, tabs: 'timeline', width: '500', height: '600',
+    small_header: 'true', adapt_container_width: 'true', hide_cover: 'false', show_facepile: 'false',
+  }).toString();
+---
+<div class="fb" data-fb>
+  {pages.length > 1 && (
+    <div class="fb-tabs" role="tablist" aria-label="Facebook pages">
+      {pages.map((p, i) => (
+        <button class="fb-tab" type="button" role="tab" aria-selected={i === 0 ? 'true' : 'false'} data-key={p.key}>{p.name}</button>
+      ))}
+    </div>
+  )}
+  {pages.map((p, i) => (
+    <div class="fb-panel" role="tabpanel" data-panel={p.key} data-src={src(p.plugin)} data-title={`${p.name} on Facebook`} hidden={i !== 0}>
+    </div>
+  ))}
+  {pages.map((p, i) => (
+    <p class="fb-fallback" data-fallback={p.key} hidden={i !== 0}>Can’t see the posts? <a href={p.link} rel="noopener">Open {p.name} on Facebook</a></p>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-fb]').forEach((root) => {
+    const load = (panel: HTMLElement) => {
+      if (panel.dataset.loaded) return;
+      const frame = document.createElement('iframe');
+      frame.src = panel.dataset.src || '';
+      frame.title = panel.dataset.title || 'Facebook posts';
+      frame.loading = 'lazy';
+      frame.setAttribute('allow', 'encrypted-media');
+      panel.appendChild(frame);
+      panel.dataset.loaded = '1';
+    };
+    const show = (key: string) => {
+      root.querySelectorAll<HTMLElement>('[data-panel]').forEach((p) => {
+        const on = p.dataset.panel === key;
+        p.hidden = !on;
+        if (on) load(p);
+      });
+      root.querySelectorAll<HTMLElement>('[data-fallback]').forEach((p) => { p.hidden = p.dataset.fallback !== key; });
+      root.querySelectorAll<HTMLElement>('.fb-tab').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.key === key)));
+    };
+    root.querySelectorAll<HTMLElement>('.fb-tab').forEach((t) => t.addEventListener('click', () => show(t.dataset.key || '')));
+    // Load the first feed only when it scrolls near the screen.
+    const first = root.querySelector<HTMLElement>('[data-panel]:not([hidden])');
+    if (first) {
+      const io = new IntersectionObserver((entries) => {
+        if (entries.some((e) => e.isIntersecting)) { load(first); io.disconnect(); }
+      }, { rootMargin: '300px' });
+      io.observe(first);
+    }
+  });
+</script>

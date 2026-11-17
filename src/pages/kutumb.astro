@@ -1,0 +1,109 @@
+---
+import Base from '../layouts/Base.astro';
+import Stats from '../components/Stats.astro';
+import Cta from '../components/Cta.astro';
+import FacebookFeed from '../components/FacebookFeed.astro';
+import { PARTNER_SITES, FACEBOOK } from '../data/site';
+
+const fb = FACEBOOK.find((f) => f.key === 'kutumb')!;
+const glance: [string, string][] = [
+  ['3,820', 'people helped by Clinic on Wheels'],
+  ['4,478', 'people treated at the railway station, ghats and clinics'],
+  ['716', 'women trained in sewing, beauty, crafts and literacy'],
+  ['136', 'children on scholarships'],
+  ['71', 'children at the music, dance and theatre school'],
+  ['67', 'children in Balwadi preschool'],
+];
+const grads = [
+  ['Atul, 22', 'Law (B.A. LL.B.), St. Wilfred’s College of Law, Jaipur, year 3', 'Has lived at Kutumb since he was four. Wants to be a lawyer who stands up for children’s rights.'],
+  ['Saloni, 22', 'BBA completed, now a sales executive in Noida', 'Grew up at Kutumb from age three. Building a career in management and a role model for other girls.'],
+  ['Neha, 24', 'Master of Social Work, IGNOU', 'Inspired by the work she saw at Kutumb, she is training for child protection and community work.'],
+  ['Krishna, 21', 'B.Tech, Cluster Innovation Centre, University of Delhi, year 2', 'Strong in maths and science since childhood. Wants to build software that helps society.'],
+  ['Chandan, 20', 'Bachelor of Computer Applications, year 2', 'Dreams of an MBA and, one day, a software company that creates jobs for young people.'],
+  ['Manoj, 20', 'B.Sc. Computer Science, Dyal Singh College, University of Delhi', 'A gifted musician who wants to perform and mentor young musicians.'],
+  ['Mayuri, 20', 'B.Com., after Class XII in commerce', 'A singer in Kutumb’s cultural programmes who plans to study management.'],
+  ['Ketki, 20', 'General Nursing and Midwifery, SAS Medical College', 'A Kathak dancer training to be a skilled, caring nurse.'],
+];
+---
+<Base title="Kutumb, Varanasi" description="Kutumb gives children from Varanasi’s streets a family, runs Clinic on Wheels for villages with no doctor, and trains women for work.">
+  <section class="page-head">
+    <div class="wrap narrow">
+      <h1>Kutumb, Varanasi</h1>
+      <p class="lede">Kutumb means family. Since 2002, Dr. Ashish, a physician, and Puja, a social worker, have given children from Varanasi’s railway platforms a home, schooling and a future. Today Kutumb Village is a campus that also serves the villages and slums around it.</p>
+      <div class="links">
+        <a class="btn btn-ghost" href={PARTNER_SITES.kutumb} rel="noopener">Visit kutumbfamily.org</a>
+        <a class="btn btn-ghost" href={fb.link} rel="noopener">Kutumb on Facebook</a>
+      </div>
+      <figure class="page-photo"><img src="/images/kathak.jpg" alt="Kutumb children performing Kathak at Ghat Sandhya on Assi Ghat" width="420" height="315" /></figure>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <h2>2026 at a glance</h2>
+      <p class="intro">October 2025 to September 2026, as reported by Kutumb.</p>
+      <Stats items={glance} />
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap narrow">
+      <h2>Children</h2>
+      <h3>Balwadi preschool</h3>
+      <p>67 young children attended Kutumb’s Balwadi in Nadesar this year, and 25 moved on to primary school.</p>
+      <h3>Scholarships</h3>
+      <p>136 children stayed in school with Kutumb scholarships: 57 in Nadesar and 79 in Babatpur, including 26 children who live at Kutumb. Among older scholarship students, 29 took job-oriented vocational courses and 17 have been placed with companies.</p>
+      <h3>Music, dance and theatre</h3>
+      <p>Alongside government school, children at the Sangat Mahavidyalay, affiliated with the Prayag Sangat Samiti, learn classical vocal, tabla, harmonium, sitar, guitar, Kathak and theatre. Enrollment grew to 71, and they staged 22 workshops and performances, including Ghat Sandhya at Assi Ghat, U.P. Sthapana Diwas, and the Navratri and Holi Utsavs.</p>
+      <figure class="figure"><img src="/images/music.jpg" alt="Kutumb children learning tabla" width="565" height="314" loading="lazy" /></figure>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <h2>They grew up at Kutumb. Now they’re in college.</h2>
+      <p class="intro">Eight young people who came to Kutumb as small children are in higher education. Seven are still studying, and Saloni has finished her degree and started work.</p>
+      <div class="cards two">
+        {grads.map(([n, c, d]) => (
+          <div class="card"><h4>{n}</h4><p class="meta">{c}</p><p>{d}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap narrow">
+      <h2>Women</h2>
+      <p>716 women learned literacy, sewing, beauty and handicraft skills this year.</p>
+      <ul>
+        <li>561 trained at community sewing centres in 15 villages around Babatpur. 298 have graduated and 219 are still training.</li>
+        <li>94 trained in sewing and 48 in beauty work at the Nadesar centre.</li>
+        <li>The Babatpur sewing centre now runs as a production unit where 16 women make bags, rugs and kantha work.</li>
+      </ul>
+      <p>Women also took financial literacy and entrepreneurship training with Tata Strive. Their sales at Sanskriti Bazar, market stalls, herbal gulal for Holi and mehandi at the Teej festival earned ₹99,000.</p>
+      <figure class="figure"><img src="/images/sewing.jpg" alt="A woman sewing at a Kutumb sewing centre" width="384" height="288" loading="lazy" /></figure>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap narrow">
+      <h2>Health</h2>
+      <h3>Clinic on Wheels</h3>
+      <p>Launched in 2023, Clinic on Wheels brings a doctor, free medicines and health education to isolated villages and urban slums. This year it held 122 camps and helped 3,820 people: 1,406 men, 1,726 women and 688 children. It made 1,977 follow-up visits and referred 12 patients to hospital.</p>
+      <figure class="figure"><img src="/images/clinic.jpg" alt="Families waiting at a Clinic on Wheels camp" width="560" height="420" loading="lazy" /></figure>
+      <h3>Disha: care on the streets</h3>
+      <p>The Disha program treated 3,637 people at Varanasi railway station and Dashashwamedh Ghat, with 2,835 wound dressings and medicines for 1,950. Five destitute people were helped off the streets.</p>
+      <h3>Community clinics</h3>
+      <p>Kutumb’s clinics in Babatpur and Nadesar treated 841 patients. Eye camps led to 60 eye operations and 190 pairs of glasses, and 336 people had their blood sugar checked.</p>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap">
+      <h2>Latest from Kutumb</h2>
+      <FacebookFeed only="kutumb" />
+    </div>
+  </section>
+
+  <Cta heading="Keep Clinic on Wheels on the road." />
+</Base>

@@ -1,0 +1,10 @@
+---
+interface Props { heading?: string }
+const { heading = 'Help a child stay in school this year.' } = Astro.props;
+---
+<section class="cta">
+  <div class="wrap cta-in">
+    <h2>{heading}</h2>
+    <a class="btn btn-primary" href="/donate/">Ways to donate</a>
+  </div>
+</section>

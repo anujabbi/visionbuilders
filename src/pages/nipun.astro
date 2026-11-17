@@ -1,0 +1,94 @@
+---
+import Base from '../layouts/Base.astro';
+import Stats from '../components/Stats.astro';
+import Cta from '../components/Cta.astro';
+import FacebookFeed from '../components/FacebookFeed.astro';
+import { PARTNER_SITES, FACEBOOK } from '../data/site';
+
+const fb = FACEBOOK.find((f) => f.key === 'nipun')!;
+const glance: [string, string][] = [
+  ['402', 'children given a hot meal every day'],
+  ['128', 'children moved into government schools'],
+  ['661', 'young people in UMANG job training'],
+  ['454', 'trainees now in jobs or their own business'],
+  ['25', 'girls on Vision Builders scholarships'],
+];
+const pillars = [
+  ['Job training through UMANG', 'Courses in dress design, beauty and wellness, basic computer skills, Tally accounting and spoken English give young people practical skills and a path to earning their own living. All classes run at NIPUN’s UMANG training centres.', '/images/computer.jpg', 'Young women in an UMANG computer class'],
+  ['Hot meals for children', 'Every child at NIPUN’s education centres gets a freshly cooked, nutritious meal. It fights malnutrition, supports healthy growth and keeps children coming to class.', '/images/kids.jpg', 'Children at a NIPUN centre'],
+  ['Local teachers', 'Vision Builders pays part of the salaries of NIPUN’s teachers, many of whom come from the same communities. It supports their families and builds a learning system the community runs itself.', '/images/dandiya.jpg', 'Trainees and teachers celebrating Navratri at the UMANG centre'],
+  ['Scholarships for girls', 'The Vision Builders Scholarship supports 25 adolescent girls from Meera Bagh and Nihal Vihar, chosen against clear criteria, so money is not the reason they stop studying.', '/images/workshop.jpg', 'Girls and women at an art and craft workshop'],
+];
+const stories = [
+  ['Manisha', 'Manisha moved to Delhi from Bihar and had to leave school when money ran out. She finished Class X through open schooling, then took UMANG’s Beauty and Wellness course in 2025. After working in a salon, she opened her own parlour and now earns ₹15,000–18,000 a month.', '/images/parlour.jpg', 'Manisha outside the beauty parlour she opened'],
+  ['Bhawna, 22', 'Bhawna had to stop her studies after Class XII and taught herself stitching from YouTube videos. In April 2026 she joined UMANG’s Self-Employed Tailor course and began sewing for neighbours before she even finished. She now earns ₹6,000–10,000 a month and plans to return to college.', '/images/tailoring.jpg', 'A trainee at a sewing machine at the UMANG centre'],
+  ['Priya, 24', 'Priya dreamed of being a makeup artist, but her family couldn’t afford training. After UMANG’s Beauty and Wellness course she joined a salon and is earning her first paycheque. Her next goal is to work independently.', null, null],
+];
+---
+<Base title="NIPUN, New Delhi" description="NIPUN feeds 402 children a day, moves children into school and trains young people for work in Delhi’s slum communities.">
+  <section class="page-head">
+    <div class="wrap narrow">
+      <h1>NIPUN, New Delhi</h1>
+      <p class="lede">NIPUN works in the slum communities of West and South-West Delhi, helping children learn and young people find work. Vision Builders supports four parts of its work.</p>
+      <div class="links">
+        <a class="btn btn-ghost" href={PARTNER_SITES.nipun} rel="noopener">Visit nipun.org</a>
+        <a class="btn btn-ghost" href={fb.link} rel="noopener">NIPUN on Facebook</a>
+      </div>
+      <figure class="page-photo"><img src="/images/navrang.jpg" alt="NIPUN’s Navrang Utsav alumni celebration" width="1264" height="600" /></figure>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <h2>2026 at a glance</h2>
+      <p class="intro">November 2025 to October 2026, as reported by NIPUN.</p>
+      <Stats items={glance} />
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap">
+      <h2>What we support at NIPUN</h2>
+      <div class="cards two">
+        {pillars.map(([h, p, img, alt]) => (
+          <div class="card"><img src={img} alt={alt} loading="lazy" /><h4>{h}</h4><p>{p}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap narrow">
+      <h2>Meals and school</h2>
+      <p>NIPUN serves hot meals to 402 children at its centres in Meera Bagh (220) and Kapashera (182). Every one of them attends preschool or remedial classes. Once children reach the right level, NIPUN helps them join government school, and 128 have made that move in 2025 and 2026.</p>
+
+      <h2 style="margin-top:48px">UMANG job training</h2>
+      <h3>UMANG I, Nihal Vihar</h3>
+      <p>409 young people completed courses this year: 104 in basic computer skills, 105 in dress design and tailoring, 102 in beauty and wellness, and 98 in Tally accounting. So far 278 trainees have found jobs or started their own businesses.</p>
+      <h3>UMANG II, Kapashera</h3>
+      <p>Aimed at girls and women, UMANG II set out to train 200 and registered 252: 79 in basic computer skills, 82 in self-employed tailoring and 91 in beauty and wellness. 176 are now earning, in jobs or their own work.</p>
+      <h3>Beyond the classroom</h3>
+      <p>At the Navrang Utsav alumni meet, former trainees shared their stories and sold handmade Diwali products. 40 women and girls learned tie-dye and Lippan art at a two-day workshop, and an Entrepreneurship Development Utsav taught business planning, marketing and money management to trainees finishing their six-month courses.</p>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap">
+      <h2>From training to a paycheque</h2>
+      <div class="cards three">
+        {stories.map(([n, d, img, alt]) => (
+          <div class="card">{img && <img src={img} alt={alt} loading="lazy" />}<h4>{n}</h4><p>{d}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <h2>Latest from NIPUN</h2>
+      <FacebookFeed only="nipun" />
+    </div>
+  </section>
+
+  <Cta heading="Give a young person the skills to earn." />
+</Base>

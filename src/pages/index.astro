@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import Stats from '../components/Stats.astro';
+import Cta from '../components/Cta.astro';
+import FacebookFeed from '../components/FacebookFeed.astro';
+
+const why = [
+  ['Your whole gift goes to the work', 'We have no paid staff. Our volunteer board covers the running costs.'],
+  ['We stay for the long haul', 'Children who came to Kutumb at four are now studying law, nursing and technology. Eight are in college or working.'],
+  ['Local leaders, trust by transparency', 'We work only with trusted local partners. We audit their books regularly and visit in person, so every dollar reaches the cause it was given for.'],
+  ['You see every result', 'Our partners report every year, and we publish the numbers in our annual newsletter.'],
+];
+const stats: [string, string][] = [
+  ['3,820', 'people helped by Clinic on Wheels'],
+  ['716', 'women trained for work'],
+  ['136', 'children kept in school on scholarships'],
+  ['402', 'children given a hot meal every day'],
+  ['128', 'children moved into government schools'],
+  ['454', 'young people now in jobs or their own business'],
+];
+---
+<Base>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-media">
+        <img src="/images/kids.jpg" alt="Children at NIPUN’s education centre in Delhi" width="1088" height="1249" fetchpriority="high" />
+      </div>
+      <div>
+        <h1>Every child deserves a family, a school and a future.</h1>
+        <p class="lede">We bring health care, education and job skills to the poorest communities of Varanasi and Delhi, through local leaders who live there.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="/donate/">Donate</a>
+          <a class="btn btn-ghost" href="/newsletter/">Read the 2026 newsletter</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap">
+      <h2>Why give with Vision Builders</h2>
+      <div class="why">
+        {why.map(([h, p]) => <div><h3>{h}</h3><p>{p}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap">
+      <h2>What your gifts did in 2026</h2>
+      <p class="intro">Reported by our partners for October 2025 to October 2026.</p>
+      <Stats items={stats} />
+      <a class="more" href="/newsletter/">See the full 2026 newsletter</a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap partners">
+      <h2>Our partners</h2>
+      <article class="partner">
+        <img src="/images/kathak.jpg" alt="Kutumb children performing Kathak on the ghats of Varanasi" width="420" height="315" loading="lazy" />
+        <div>
+          <h3>Kutumb, Varanasi</h3>
+          <p class="where">Since 2002</p>
+          <p>Kutumb means family. It began by giving children from Varanasi’s railway platforms a home and schooling. Today it also runs Clinic on Wheels for villages with no doctor, sewing centres in 15 villages and a music and dance school.</p>
+          <a class="more" href="/kutumb/">More about Kutumb</a>
+        </div>
+      </article>
+      <article class="partner">
+        <img src="/images/computer.jpg" alt="Young women in a NIPUN computer class" width="1280" height="960" loading="lazy" />
+        <div>
+          <h3>NIPUN, New Delhi</h3>
+          <p class="where">Since 2005</p>
+          <p>NIPUN works in the slum communities of West and South-West Delhi. We fund job training, hot meals for children, local teachers and scholarships for girls.</p>
+          <a class="more" href="/nipun/">More about NIPUN</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap">
+      <h2>From the field</h2>
+      <p class="intro">The latest posts from our Facebook pages.</p>
+      <FacebookFeed />
+    </div>
+  </section>
+
+  <Cta />
+</Base>
