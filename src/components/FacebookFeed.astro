@@ -1,18 +1,14 @@
 ---
 // Live posts from Facebook, using Meta's free Page Plugin.
 // Each tab loads its feed only when chosen, so the page stays fast.
-// If a browser blocks Facebook, visitors still see the "Open on Facebook" link.
+// The plugin is sized to the space it has (Facebook allows 180–500px wide),
+// so it never gets cut off on phones. If a browser blocks Facebook,
+// visitors still see the "Open on Facebook" link.
 import { FACEBOOK } from '../data/site';
 
 interface Props { only?: string }
 const { only } = Astro.props;
 const pages = only ? FACEBOOK.filter((f) => f.key === only) : FACEBOOK;
-const src = (url: string) =>
-  'https://www.facebook.com/plugins/page.php?' +
-  new URLSearchParams({
-    href: url, tabs: 'timeline', width: '500', height: '600',
-    small_header: 'true', adapt_container_width: 'true', hide_cover: 'false', show_facepile: 'false',
-  }).toString();
 ---
 <div class="fb" data-fb>
   {pages.length > 1 && (
@@ -23,7 +19,7 @@ const src = (url: string) =>
     </div>
   )}
   {pages.map((p, i) => (
-    <div class="fb-panel" role="tabpanel" data-panel={p.key} data-src={src(p.plugin)} data-title={`${p.name} on Facebook`} hidden={i !== 0}>
+    <div class="fb-panel" role="tabpanel" data-panel={p.key} data-href={p.plugin} data-title={`${p.name} on Facebook`} hidden={i !== 0}>
     </div>
   ))}
   {pages.map((p, i) => (
@@ -32,17 +28,28 @@ const src = (url: string) =>
 </div>
 
 <script>
+  const HEIGHT = 900;
+  const build = (panel: HTMLElement) => {
+    const width = Math.max(180, Math.min(500, Math.floor(panel.clientWidth)));
+    const params = new URLSearchParams({
+      href: panel.dataset.href || '', tabs: 'timeline',
+      width: String(width), height: String(HEIGHT),
+      small_header: 'false', adapt_container_width: 'true', hide_cover: 'false', show_facepile: 'false',
+    });
+    const frame = document.createElement('iframe');
+    frame.src = 'https://www.facebook.com/plugins/page.php?' + params.toString();
+    frame.width = String(width);
+    frame.height = String(HEIGHT);
+    frame.title = panel.dataset.title || 'Facebook posts';
+    frame.loading = 'lazy';
+    frame.setAttribute('allow', 'encrypted-media');
+    frame.setAttribute('scrolling', 'no');
+    panel.replaceChildren(frame);
+    panel.dataset.width = String(width);
+  };
+
   document.querySelectorAll<HTMLElement>('[data-fb]').forEach((root) => {
-    const load = (panel: HTMLElement) => {
-      if (panel.dataset.loaded) return;
-      const frame = document.createElement('iframe');
-      frame.src = panel.dataset.src || '';
-      frame.title = panel.dataset.title || 'Facebook posts';
-      frame.loading = 'lazy';
-      frame.setAttribute('allow', 'encrypted-media');
-      panel.appendChild(frame);
-      panel.dataset.loaded = '1';
-    };
+    const load = (panel: HTMLElement) => { if (!panel.dataset.width) build(panel); };
     const show = (key: string) => {
       root.querySelectorAll<HTMLElement>('[data-panel]').forEach((p) => {
         const on = p.dataset.panel === key;
@@ -53,6 +60,7 @@ const src = (url: string) =>
       root.querySelectorAll<HTMLElement>('.fb-tab').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.key === key)));
     };
     root.querySelectorAll<HTMLElement>('.fb-tab').forEach((t) => t.addEventListener('click', () => show(t.dataset.key || '')));
+
     // Load the first feed only when it scrolls near the screen.
     const first = root.querySelector<HTMLElement>('[data-panel]:not([hidden])');
     if (first) {
@@ -61,5 +69,17 @@ const src = (url: string) =>
       }, { rootMargin: '300px' });
       io.observe(first);
     }
+
+    // Re-fit the visible feed if the screen width changes a lot (e.g. phone rotated).
+    let timer: number | undefined;
+    window.addEventListener('resize', () => {
+      clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        const open = root.querySelector<HTMLElement>('[data-panel]:not([hidden])');
+        if (!open || !open.dataset.width) return;
+        const fit = Math.max(180, Math.min(500, Math.floor(open.clientWidth)));
+        if (Math.abs(fit - Number(open.dataset.width)) > 40) build(open);
+      }, 300);
+    });
   });
 </script>
