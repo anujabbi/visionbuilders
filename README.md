@@ -1,6 +1,6 @@
 # visionbuilders.org
 
-The Vision Builders website: a static site built with [Astro](https://astro.build), hosted on Cloudflare Pages.
+The Vision Builders website: a static site built with [Astro](https://astro.build), hosted on Cloudflare.
 
 ## Pages
 | Page | File |
@@ -22,11 +22,12 @@ npm run build    # outputs to dist/
 ```
 
 ## Deploy (one-time setup)
-1. Push this folder to a GitHub repository.
-2. In Cloudflare: Workers & Pages > Create > Pages > Connect to Git, and pick the repository.
-3. Build settings: framework preset **Astro**, build command `npm run build`, output directory `dist`.
-4. After the first deploy, add the custom domain `visionbuilders.org` (and `www`) under the project's Custom domains. Cloudflare walks you through the DNS change.
-5. Every push to `main` now redeploys automatically, with a preview link for every branch.
+The site is served by Cloudflare Workers as static files (config in `wrangler.jsonc`).
+1. In the Cloudflare dashboard: Workers & Pages > Create > Import a repository, and pick this repo.
+2. Build command: `npm run build`. Deploy command: `npx wrangler deploy`. Leave the rest as is.
+3. After the first deploy you get a `visionbuilders.<account>.workers.dev` link. Check it on a phone.
+4. Then add `visionbuilders.org` and `www.visionbuilders.org` under the Worker's Settings > Domains & Routes. Cloudflare walks you through the DNS change.
+5. Every push to `main` now redeploys automatically.
 
 `public/_redirects` sends old WordPress addresses (like `/donate-now/` and `/kutumb-project/`) to the new pages.
 
