@@ -2,11 +2,11 @@
 import Base from '../layouts/Base.astro';
 import { ORG } from '../data/site';
 ---
-<Base title="Donate" description="Give to Vision Builders by Zelle, PayPal or check. Every gift is tax-deductible.">
+<Base title="Donate" description="Give to Vision Builders by Zelle, PayPal or check. Every donation is tax-deductible.">
   <section class="page-head">
     <div class="wrap narrow">
       <h1>Donate</h1>
-      <p class="lede">Every gift is tax-deductible. Vision Builders is a 501(c)(3), EIN {ORG.ein}, run entirely by volunteers, so your gift goes to the work.</p>
+      <p class="lede">Every donation is tax-deductible. Vision Builders is a 501(c)(3), EIN {ORG.ein}, run entirely by volunteers, so your donation goes to the work.</p>
     </div>
   </section>
 
@@ -16,7 +16,7 @@ import { ORG } from '../data/site';
         <div class="method main">
           <h2>Zelle</h2>
           <p class="tag">Our preferred way. No fees.</p>
-          <p>In your bank’s app, send your gift to</p>
+          <p>In your bank’s app, send your donation to</p>
           <p class="detail" id="zelle">{ORG.zelle}</p>
           <button class="copy" type="button" data-copy={ORG.zelle}>Copy email address</button>
         </div>
@@ -32,7 +32,7 @@ import { ORG } from '../data/site';
         </div>
       </div>
       <div class="narrow" style="margin:0">
-        <p class="small">Need a receipt for a Zelle or check gift? Email <a href={`mailto:${ORG.email}`}>{ORG.email}</a> with your name and the amount.</p>
+        <p class="small">Need a receipt for a Zelle or check donation? Email <a href={`mailto:${ORG.email}`}>{ORG.email}</a> with your name and the amount.</p>
         <p class="small">Many employers match their staff’s donations. Ask your HR team, and use our EIN, {ORG.ein}.</p>
       </div>
     </div>

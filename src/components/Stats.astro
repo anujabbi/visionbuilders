@@ -1,12 +1,17 @@
 ---
+// A list of big numbers. Each item is [number, label] or [number, label, source note].
 interface Props {
-  items: [string, string][];
+  items: (string[])[];
   compact?: boolean;
 }
 const { items, compact = false } = Astro.props;
 ---
 <ul class:list={['stats', { compact }]}>
-  {items.map(([num, label]) => (
-    <li class="stat"><span class="num">{num}</span><span class="lbl">{label}</span></li>
+  {items.map(([num, label, src]) => (
+    <li class="stat">
+      <span class="num">{num}</span>
+      <span class="lbl">{label}</span>
+      {src && <span class="src">{src}</span>}
+    </li>
   ))}
 </ul>

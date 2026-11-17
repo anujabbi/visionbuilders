@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+import { photos } from '../lib/files';
+
+// Newest first. To add photos, put them in public/images/fundraisers/<folder>/.
+const events = [
+  {
+    folder: 'clinic-on-wheels',
+    title: 'Clinic on Wheels campaign',
+    when: 'Ongoing',
+    text: 'Volunteer Suhani Verma is raising money online for Clinic on Wheels, the mobile clinic that brings doctors and free medicine to villages around Varanasi.',
+    link: { href: 'https://www.gofundme.com/f/support-vision-builders-clinic-on-wheels', label: 'Give to the campaign' },
+  },
+  {
+    folder: '2016-nyc-marathon',
+    title: 'New York City Marathon',
+    when: 'November 2016',
+    text: 'Board member Arun Verma and other Vision Builders supporters ran the New York City Marathon and raised close to $10,000.',
+  },
+  {
+    folder: '2015-dance-music',
+    title: 'Dance and Music Extravaganza',
+    when: 'November 21, 2015, Green Brook, New Jersey',
+    text: 'A show for kids, by kids, at Green Brook Middle School. All net proceeds went to Kutumb.',
+  },
+  {
+    folder: '2014-benefit-concert',
+    title: 'Benefit concert',
+    when: 'November 22, 2014, Jersey City, New Jersey',
+    text: 'A concert at Saint Peter’s University, with guests requesting songs as pledges for Kutumb. All net proceeds went to Kutumb.',
+  },
+].map((e) => ({ ...e, pics: photos(e.folder) }));
+---
+<Base title="Fundraisers" description="Concerts, marathons and campaigns that friends of Vision Builders have run for Kutumb and NIPUN.">
+  <section class="page-head">
+    <div class="wrap narrow">
+      <h1>Fundraisers</h1>
+      <p class="lede">Friends of Vision Builders have run concerts, shows, marathons and online campaigns for the children and families we support. Thank you to everyone who took part.</p>
+      <p class="small">Want to run your own fundraiser? Email <a href="mailto:info@visionbuilders.org">info@visionbuilders.org</a> and we’ll help.</p>
+    </div>
+  </section>
+
+  {events.map((e, i) => (
+    <section class:list={['sec', { 'sec-alt': i % 2 === 0 }]}>
+      <div class="wrap">
+        <div class="narrow" style="margin:0">
+          <h2>{e.title}</h2>
+          <p class="where">{e.when}</p>
+          <p>{e.text}</p>
+          {e.link && <a class="btn btn-primary" href={e.link.href} rel="noopener">{e.link.label}</a>}
+        </div>
+        {e.pics.length > 0 && (
+          <div class="gallery">
+            {e.pics.map((src) => <img src={src} alt={`${e.title} photo`} loading="lazy" />)}
+          </div>
+        )}
+      </div>
+    </section>
+  ))}
+
+  <Cta />
+</Base>

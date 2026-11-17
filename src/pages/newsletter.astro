@@ -2,7 +2,8 @@
 import Base from '../layouts/Base.astro';
 import Stats from '../components/Stats.astro';
 import Cta from '../components/Cta.astro';
-import { ORG } from '../data/site';
+import { ORG, IMPACT_2026 } from '../data/site';
+import { newsletters } from '../lib/files';
 
 const pdf = '/newsletters/vision-builders-2026-annual-newsletter.pdf';
 const kutumb: [string, string][] = [
@@ -21,14 +22,14 @@ const nipun: [string, string][] = [
   ['661', 'youth trained at UMANG and UMANG II'],
   ['454', 'trainees now in jobs or their own business'],
 ];
-// Add earlier newsletters here as { year, href } once their PDFs are in /public/newsletters.
-const archive: { year: string; href: string }[] = [];
+// Every PDF in public/newsletters shows up in the archive automatically.
+const archive = newsletters().filter((n) => n.href !== pdf);
 ---
 <Base title="2026 Annual Newsletter" description="Vision Builders’ 2026 annual newsletter: results from Kutumb in Varanasi and NIPUN in New Delhi.">
   <section class="page-head">
     <div class="wrap narrow">
       <h1>2026 Annual Newsletter</h1>
-      <p class="lede">Vision Builders has continued to help underprivileged children, women and communities through our support of Kutumb and NIPUN. Here is what your gifts did this year.</p>
+      <p class="lede">Vision Builders has continued to help underprivileged children, women and communities through our support of Kutumb and NIPUN. Here is what your donations achieved this year.</p>
       <p class="small">Kutumb figures cover October 2025 to September 2026. NIPUN figures cover November 2025 to October 2026.</p>
       <div class="links">
         <a class="btn btn-primary" href={pdf} download>Download the newsletter (PDF, 4 MB)</a>
@@ -37,6 +38,13 @@ const archive: { year: string; href: string }[] = [];
   </section>
 
   <section class="sec">
+    <div class="wrap">
+      <h2>Across both partners</h2>
+      <Stats items={IMPACT_2026} />
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
     <div class="wrap">
       <h2>Kutumb, Varanasi</h2>
       <Stats items={kutumb} compact />
@@ -47,7 +55,7 @@ const archive: { year: string; href: string }[] = [];
     </div>
   </section>
 
-  <section class="sec sec-alt">
+  <section class="sec">
     <div class="wrap">
       <h2>NIPUN, New Delhi</h2>
       <Stats items={nipun} compact />
@@ -58,7 +66,7 @@ const archive: { year: string; href: string }[] = [];
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec sec-alt">
     <div class="wrap narrow letter">
       <h2>A note from Smita</h2>
       <p>Thank you for helping the children and families in these communities.</p>
@@ -67,11 +75,11 @@ const archive: { year: string; href: string }[] = [];
     </div>
   </section>
 
-  <section class="sec sec-alt">
+  <section class="sec">
     <div class="wrap narrow">
       <h2>Earlier newsletters</h2>
       {archive.length > 0 ? (
-        <ul>{archive.map((a) => <li><a href={a.href}>{a.year} newsletter</a></li>)}</ul>
+        <div class="links">{archive.map((a) => <a class="btn btn-ghost" href={a.href} download>{a.year} newsletter (PDF)</a>)}</div>
       ) : (
         <p>Looking for an earlier year? Email <a href={`mailto:${ORG.email}`}>{ORG.email}</a> and we’ll send it.</p>
       )}

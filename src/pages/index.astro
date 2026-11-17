@@ -3,21 +3,15 @@ import Base from '../layouts/Base.astro';
 import Stats from '../components/Stats.astro';
 import Cta from '../components/Cta.astro';
 import FacebookFeed from '../components/FacebookFeed.astro';
+import { IMPACT_2026 } from '../data/site';
 
 const why = [
-  ['Your whole gift goes to the work', 'We have no paid staff. Our volunteer board covers the running costs.'],
-  ['We stay for the long haul', 'Children who came to Kutumb at four are now studying law, nursing and technology. Eight are in college or working.'],
+  ['Every donation goes to the work', 'We have no paid staff. Our volunteer board covers the running costs.'],
+  ['We stay for the long haul', 'Children who came to Kutumb at three are now studying law, nursing and technology. Eight are in college or working.'],
   ['Local leaders, trust by transparency', 'We work only with trusted local partners. We audit their books regularly and visit in person, so every dollar reaches the cause it was given for.'],
   ['You see every result', 'Our partners report every year, and we publish the numbers in our annual newsletter.'],
 ];
-const stats: [string, string][] = [
-  ['3,820', 'people helped by Clinic on Wheels'],
-  ['716', 'women trained for work'],
-  ['136', 'children kept in school on scholarships'],
-  ['402', 'children given a hot meal every day'],
-  ['128', 'children moved into government schools'],
-  ['454', 'young people now in jobs or their own business'],
-];
+
 ---
 <Base>
   <section class="hero">
@@ -47,9 +41,9 @@ const stats: [string, string][] = [
 
   <section class="sec sec-alt">
     <div class="wrap">
-      <h2>What your gifts did in 2026</h2>
-      <p class="intro">Reported by our partners for October 2025 to October 2026.</p>
-      <Stats items={stats} />
+      <h2>What your donations achieved in 2026</h2>
+      <p class="intro">Totals across Kutumb and NIPUN, as reported for October 2025 to October 2026.</p>
+      <Stats items={IMPACT_2026} />
       <a class="more" href="/newsletter/">See the full 2026 newsletter</a>
     </div>
   </section>

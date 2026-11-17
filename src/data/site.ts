@@ -44,7 +44,19 @@ export const PARTNER_SITES = {
 
 export const NAV = [
   { href: '/', label: 'Home' },
+  { href: '/about/', label: 'Who we are' },
   { href: '/kutumb/', label: 'Kutumb' },
   { href: '/nipun/', label: 'NIPUN' },
   { href: '/newsletter/', label: 'Newsletter' },
+  { href: '/fundraisers/', label: 'Fundraisers' },
+];
+
+// Combined across both partners. Each note shows where the total comes from.
+export const IMPACT_2026: string[][] = [
+  ['638', 'children in preschool, school or college with our support', 'Kutumb 211, NIPUN 427'],
+  ['1,377', 'women and young people trained for work', 'Kutumb 716, NIPUN 661'],
+  ['471', 'trainees now earning a living', 'NIPUN 454, Kutumb 17'],
+  ['8,298', 'patients given free medical care', 'Clinic on Wheels 3,820, other Kutumb clinics 4,478'],
+  ['402', 'children given a hot meal every day', 'NIPUN'],
+  ['128', 'children moved into government schools', 'NIPUN'],
 ];

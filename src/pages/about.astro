@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+
+const board = [
+  ['Smita Abbi', 'President', 'Ph.D. in Molecular Medicine from Cornell University. Works in regulatory affairs at a pharmaceutical company.'],
+  ['Bhanu Bahl', 'Board member', 'Ph.D. in Biomedical Informatics from UMDNJ/Rutgers. Works in clinical and translational science informatics at a pharmaceutical company in Boston.'],
+  ['Tavish Bahl', 'Board member', 'M.B.A. from the New York Institute of Technology. Works in treasury and risk management at a global financial consultancy.'],
+  ['Kumarika Banerjee', 'Board member', 'Ph.D. and M.D. from the University of Illinois, Chicago. Practices as an anesthesiologist in New York.'],
+  ['Sunny Srinivasan', 'Board member', 'Ph.D. from the University of New Mexico and M.B.A. from Cornell. Leads product management at a semiconductor equipment company.'],
+  ['Suhani Verma', 'Social media manager', 'Runs our social media as a volunteer.'],
+];
+---
+<Base title="Who we are" description="Vision Builders is an all-volunteer nonprofit led by a volunteer board. Meet the people behind it.">
+  <section class="page-head">
+    <div class="wrap narrow">
+      <h1>Who we are</h1>
+      <p class="lede">Vision Builders is an all-volunteer U.S. nonprofit. We find people who are already running small, effective projects in very poor communities, and we help them grow.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap narrow">
+      <h2>How we work</h2>
+      <p>We partner with local leaders who started their work before we arrived, in health care, children’s education and job training for women. Together we plan and fund the next stage of that work, based on what the community needs most.</p>
+      <p>Our partners today are <a href="/kutumb/">Kutumb</a> in Varanasi and <a href="/nipun/">NIPUN</a> in New Delhi. We are also looking for projects to support in other parts of the world, especially in Africa.</p>
+      <p>We have no paid staff. Our board covers the running costs, so every donation goes to the work. We visit our partners in person and review their reports and accounts.</p>
+
+      <h2 style="margin-top:48px">Our story</h2>
+      <p>Vision Builders was founded by Stuart and Katie Kirkpatrick. In 2013 they began working with Smita Abbi and Arun Verma, and the U.S. office moved from Michigan to New Jersey. Smita now leads Vision Builders with the board of directors.</p>
+    </div>
+  </section>
+
+  <section class="sec sec-alt">
+    <div class="wrap">
+      <h2>Board and volunteers</h2>
+      <div class="cards three">
+        {board.map(([name, role, bio]) => (
+          <div class="card"><h4>{name}</h4><p class="meta">{role}</p><p>{bio}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Cta heading="Join us. Every donation goes to the work." />
+</Base>
