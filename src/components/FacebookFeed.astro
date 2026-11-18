@@ -3,7 +3,7 @@
 // Each tab loads its feed only when chosen, so the page stays fast.
 // The plugin is sized to the space it has (Facebook allows 180–500px wide),
 // so it never gets cut off on phones. If a browser blocks Facebook,
-// visitors still see the "Open on Facebook" link.
+// visitors still see the "Open on Facebook" link, which sits above the feed.
 import { FACEBOOK } from '../data/site';
 
 interface Props { only?: string }
@@ -19,11 +19,11 @@ const pages = only ? FACEBOOK.filter((f) => f.key === only) : FACEBOOK;
     </div>
   )}
   {pages.map((p, i) => (
-    <div class="fb-panel" role="tabpanel" data-panel={p.key} data-href={p.plugin} data-title={`${p.name} on Facebook`} hidden={i !== 0}>
-    </div>
+    <p class="fb-fallback" data-fallback={p.key} hidden={i !== 0}>Can’t see the posts? <a href={p.link} rel="noopener">Open {p.name} on Facebook</a></p>
   ))}
   {pages.map((p, i) => (
-    <p class="fb-fallback" data-fallback={p.key} hidden={i !== 0}>Can’t see the posts? <a href={p.link} rel="noopener">Open {p.name} on Facebook</a></p>
+    <div class="fb-panel" role="tabpanel" data-panel={p.key} data-href={p.plugin} data-title={`${p.name} on Facebook`} hidden={i !== 0}>
+    </div>
   ))}
 </div>
 

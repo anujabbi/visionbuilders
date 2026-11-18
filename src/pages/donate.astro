@@ -6,7 +6,7 @@ import { ORG } from '../data/site';
   <section class="page-head">
     <div class="wrap narrow">
       <h1>Donate</h1>
-      <p class="lede">Every donation is tax-deductible. Vision Builders is a 501(c)(3), EIN {ORG.ein}, run entirely by volunteers, so your donation goes to the work.</p>
+      <p class="lede">Every donation is tax-deductible. Vision Builders is a 501(c)(3), EIN <span class="nowrap">{ORG.ein}</span>, run entirely by volunteers, so your donation goes to the work.</p>
     </div>
   </section>
 
@@ -33,7 +33,7 @@ import { ORG } from '../data/site';
       </div>
       <div class="narrow" style="margin:0">
         <p class="small">Need a receipt for a Zelle or check donation? Email <a href={`mailto:${ORG.email}`}>{ORG.email}</a> with your name and the amount.</p>
-        <p class="small">Many employers match their staff’s donations. Ask your HR team, and use our EIN, {ORG.ein}.</p>
+        <p class="small">Many employers match their staff’s donations. Ask your HR team, and use our EIN, <span class="nowrap">{ORG.ein}</span>.</p>
       </div>
     </div>
   </section>

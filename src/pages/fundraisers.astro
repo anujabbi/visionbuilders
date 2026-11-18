@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Cta from '../components/Cta.astro';
-import { photos } from '../lib/files';
+import { photos, imageSize } from '../lib/files';
 
 // Newest first. To add photos, put them in public/images/fundraisers/<folder>/.
 const events = [
@@ -52,7 +52,11 @@ const events = [
         </div>
         {e.pics.length > 0 && (
           <div class="gallery">
-            {e.pics.map((src, n) => <a href={src}><img src={src} alt={`${e.title}, photo ${n + 1}`} loading="lazy" /></a>)}
+            {e.pics.map((src, n) => {
+              const size = imageSize(src);
+              const tall = size.width && size.height && size.height > size.width * 1.15;
+              return <a href={src} class:list={{ tall }}><img src={src} alt={`${e.title}, photo ${n + 1}`} loading="lazy" {...size} /></a>;
+            })}
           </div>
         )}
       </div>
