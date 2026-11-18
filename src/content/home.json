@@ -1,0 +1,56 @@
+{
+  "headline": "Every child deserves a family, a school and a future.",
+  "intro": "We bring health care, education and job skills to the poorest communities of Varanasi and Delhi, through local leaders who live there.",
+  "why": [
+    {
+      "title": "Every donation goes to the work",
+      "text": "We have no paid staff. Our volunteer board covers the running costs."
+    },
+    {
+      "title": "We stay for the long haul",
+      "text": "Children who came to Kutumb at three are now studying law, nursing and technology. Eight are in college or working."
+    },
+    {
+      "title": "Local leaders, trust by transparency",
+      "text": "We work only with trusted local partners. We audit their books regularly and visit in person, so every dollar reaches the cause it was given for."
+    },
+    {
+      "title": "You see every result",
+      "text": "Our partners report every year, and we publish the numbers in our annual newsletter."
+    }
+  ],
+  "impact_year": "2026",
+  "impact_note": "Totals across Kutumb and NIPUN, as reported for October 2025 to October 2026.",
+  "impact": [
+    {
+      "number": "638",
+      "label": "children in preschool, school or college with our support",
+      "source": "Kutumb 211, NIPUN 427"
+    },
+    {
+      "number": "1,377",
+      "label": "women and young people trained for work",
+      "source": "Kutumb 716, NIPUN 661"
+    },
+    {
+      "number": "471",
+      "label": "trainees now earning a living",
+      "source": "NIPUN 454, Kutumb 17"
+    },
+    {
+      "number": "8,298",
+      "label": "patients given free medical care",
+      "source": "Clinic on Wheels 3,820, other Kutumb clinics 4,478"
+    },
+    {
+      "number": "402",
+      "label": "children given a hot meal every day",
+      "source": "NIPUN"
+    },
+    {
+      "number": "128",
+      "label": "children moved into government schools",
+      "source": "NIPUN"
+    }
+  ]
+}

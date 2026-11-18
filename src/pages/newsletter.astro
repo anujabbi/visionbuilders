@@ -1,9 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
-import { newsletterPages } from '../lib/files';
+import { NEWSLETTERS } from '../data/site';
 
-// Every year with page images in public/newsletters/pages appears automatically, newest first.
-const issues = newsletterPages();
+// Edited in Pages CMS (src/content/newsletters.json). Newest year first.
+const issues = NEWSLETTERS.map((i) => ({ year: String(i.year), pages: i.pages || [] }));
 const latest = issues[0]?.year;
 ---
 <Base title="Annual newsletters" description="Vision Builders’ annual newsletters: results from Kutumb in Varanasi and NIPUN in New Delhi.">

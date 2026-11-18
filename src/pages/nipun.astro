@@ -3,28 +3,13 @@ import Base from '../layouts/Base.astro';
 import Stats from '../components/Stats.astro';
 import Cta from '../components/Cta.astro';
 import FacebookFeed from '../components/FacebookFeed.astro';
-import { PARTNER_SITES, FACEBOOK } from '../data/site';
+import { PARTNER_SITES, FACEBOOK, NIPUN } from '../data/site';
 import { imageSize } from '../lib/files';
 
 const fb = FACEBOOK.find((f) => f.key === 'nipun')!;
-const glance: [string, string][] = [
-  ['402', 'children given a hot meal every day'],
-  ['128', 'children moved into government schools'],
-  ['661', 'young people in UMANG job training'],
-  ['454', 'trainees now in jobs or their own business'],
-  ['25', 'girls on Vision Builders scholarships'],
-];
-const pillars = [
-  ['Job training through UMANG', 'Courses in dress design, beauty and wellness, basic computer skills, Tally accounting and spoken English give young people practical skills and a path to earning their own living. All classes run at NIPUN’s UMANG training centres.', '/images/computer.jpg', 'Young women in an UMANG computer class'],
-  ['Hot meals for children', 'Every child at NIPUN’s education centres gets a freshly cooked, nutritious meal. It fights malnutrition, supports healthy growth and keeps children coming to class.', '/images/kids.jpg', 'Children at a NIPUN centre'],
-  ['Local teachers', 'Vision Builders pays part of the salaries of NIPUN’s teachers, many of whom come from the same communities. It supports their families and builds a learning system the community runs itself.', '/images/dandiya.jpg', 'Trainees and teachers celebrating Navratri at the UMANG centre'],
-  ['Scholarships for girls', 'The Vision Builders Scholarship supports 25 adolescent girls from Meera Bagh and Nihal Vihar, chosen against clear criteria, so money is not the reason they stop studying.', '/images/workshop.jpg', 'Girls and women at an art and craft workshop'],
-];
-const stories = [
-  ['Manisha', 'Manisha moved to Delhi from Bihar and had to leave school when money ran out. She finished Class X through open schooling, then took UMANG’s Beauty and Wellness course in 2025. After working in a salon, she opened her own parlour and now earns ₹15,000–18,000 a month.', '/images/parlour.jpg', 'Manisha outside the beauty parlour she opened'],
-  ['Bhawna, 22', 'Bhawna had to stop her studies after Class XII and taught herself stitching from YouTube videos. In April 2026 she joined UMANG’s Self-Employed Tailor course and began sewing for neighbours before she even finished. She now earns ₹6,000–10,000 a month and plans to return to college.', '/images/tailoring.jpg', 'A trainee at a sewing machine at the UMANG centre'],
-  ['Priya, 24', 'Priya dreamed of being a makeup artist, but her family couldn’t afford training. After UMANG’s Beauty and Wellness course she joined a salon and is earning her first paycheque. Her next goal is to work independently.', null, null],
-];
+const glance = NIPUN.glance.map((g) => [g.number, g.label]);
+const pillars = NIPUN.pillars.map((p) => [p.title, p.text, p.photo, p.photo_description]);
+const stories = NIPUN.stories.map((s) => [s.name, s.text, s.photo || null, s.photo_description || null]);
 ---
 <Base title="NIPUN, New Delhi" description="NIPUN feeds 402 children a day, moves children into school and trains young people for work in Delhi’s slum communities.">
   <section class="page-head">

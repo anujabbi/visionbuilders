@@ -1,0 +1,51 @@
+{
+  "events": [
+    {
+      "title": "Clinic on Wheels campaign",
+      "when": "Ongoing",
+      "text": "Volunteer Suhani Verma is raising money online for Clinic on Wheels, the mobile clinic that brings doctors and free medicine to villages around Varanasi.",
+      "button_link": "https://www.gofundme.com/f/support-vision-builders-clinic-on-wheels",
+      "button_text": "Give to the campaign",
+      "photos": []
+    },
+    {
+      "title": "New York City Marathon",
+      "when": "November 2016",
+      "text": "Board member Arun Verma and other Vision Builders supporters ran the New York City Marathon and raised close to $10,000.",
+      "button_link": "",
+      "button_text": "",
+      "photos": [
+        "/images/fundraisers/2016-nyc-marathon/01.jpg"
+      ]
+    },
+    {
+      "title": "Dance and Music Extravaganza",
+      "when": "November 21, 2015, Green Brook, New Jersey",
+      "text": "A show for kids, by kids, at Green Brook Middle School. All net proceeds went to Kutumb.",
+      "button_link": "",
+      "button_text": "",
+      "photos": [
+        "/images/fundraisers/2015-dance-music/01.jpg",
+        "/images/fundraisers/2015-dance-music/02.jpg",
+        "/images/fundraisers/2015-dance-music/03.jpg",
+        "/images/fundraisers/2015-dance-music/04.jpg",
+        "/images/fundraisers/2015-dance-music/05.jpg",
+        "/images/fundraisers/2015-dance-music/06.jpg",
+        "/images/fundraisers/2015-dance-music/07.jpg",
+        "/images/fundraisers/2015-dance-music/08.jpg",
+        "/images/fundraisers/2015-dance-music/09.jpg"
+      ]
+    },
+    {
+      "title": "Benefit concert",
+      "when": "November 22, 2014, Jersey City, New Jersey",
+      "text": "Sanjeev and Armeen Ramabhadran sang classic and contemporary Hindi film music at Saint Peter’s University, with guests requesting songs as pledges. All net proceeds went to Kutumb, a home for abandoned children.",
+      "button_link": "",
+      "button_text": "",
+      "photos": [
+        "/images/fundraisers/2014-benefit-concert/01.jpg",
+        "/images/fundraisers/2014-benefit-concert/02.jpg"
+      ]
+    }
+  ]
+}

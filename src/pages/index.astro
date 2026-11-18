@@ -3,14 +3,9 @@ import Base from '../layouts/Base.astro';
 import Stats from '../components/Stats.astro';
 import Cta from '../components/Cta.astro';
 import FacebookFeed from '../components/FacebookFeed.astro';
-import { IMPACT_2026 } from '../data/site';
+import { IMPACT_2026, HOME } from '../data/site';
 
-const why = [
-  ['Every donation goes to the work', 'We have no paid staff. Our volunteer board covers the running costs.'],
-  ['We stay for the long haul', 'Children who came to Kutumb at three are now studying law, nursing and technology. Eight are in college or working.'],
-  ['Local leaders, trust by transparency', 'We work only with trusted local partners. We audit their books regularly and visit in person, so every dollar reaches the cause it was given for.'],
-  ['You see every result', 'Our partners report every year, and we publish the numbers in our annual newsletter.'],
-];
+const why = HOME.why.map((w) => [w.title, w.text]);
 
 ---
 <Base>
@@ -20,8 +15,8 @@ const why = [
         <img src="/images/kids.jpg" alt="Children at NIPUN’s education centre in Delhi" width="1088" height="1249" fetchpriority="high" />
       </div>
       <div>
-        <h1>Every child deserves a family, a school and a future.</h1>
-        <p class="lede">We bring health care, education and job skills to the poorest communities of Varanasi and Delhi, through local leaders who live there.</p>
+        <h1>{HOME.headline}</h1>
+        <p class="lede">{HOME.intro}</p>
         <div class="actions">
           <a class="btn btn-primary" href="/donate/">Donate</a>
           <a class="btn btn-ghost" href="/newsletter/">Read the 2026 newsletter</a>
@@ -41,8 +36,8 @@ const why = [
 
   <section class="sec sec-alt">
     <div class="wrap">
-      <h2>What your donations achieved in 2026</h2>
-      <p class="intro">Totals across Kutumb and NIPUN, as reported for October 2025 to October 2026.</p>
+      <h2>What your donations achieved in {HOME.impact_year}</h2>
+      <p class="intro">{HOME.impact_note}</p>
       <Stats items={IMPACT_2026} />
       <a class="more" href="/newsletter/">See the full 2026 newsletter</a>
     </div>

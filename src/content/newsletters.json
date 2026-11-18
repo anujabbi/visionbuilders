@@ -1,0 +1,55 @@
+{
+  "issues": [
+    {
+      "year": "2026",
+      "pages": [
+        "/newsletters/pages/2026-01.jpg",
+        "/newsletters/pages/2026-02.jpg",
+        "/newsletters/pages/2026-03.jpg",
+        "/newsletters/pages/2026-04.jpg",
+        "/newsletters/pages/2026-05.jpg",
+        "/newsletters/pages/2026-06.jpg"
+      ]
+    },
+    {
+      "year": "2025",
+      "pages": [
+        "/newsletters/pages/2025-01.jpg",
+        "/newsletters/pages/2025-02.jpg",
+        "/newsletters/pages/2025-03.jpg",
+        "/newsletters/pages/2025-04.jpg"
+      ]
+    },
+    {
+      "year": "2024",
+      "pages": [
+        "/newsletters/pages/2024-01.jpg",
+        "/newsletters/pages/2024-02.jpg",
+        "/newsletters/pages/2024-03.jpg",
+        "/newsletters/pages/2024-04.jpg"
+      ]
+    },
+    {
+      "year": "2023",
+      "pages": [
+        "/newsletters/pages/2023-01.jpg",
+        "/newsletters/pages/2023-02.jpg",
+        "/newsletters/pages/2023-03.jpg",
+        "/newsletters/pages/2023-04.jpg"
+      ]
+    },
+    {
+      "year": "2022",
+      "pages": [
+        "/newsletters/pages/2022-01.jpg",
+        "/newsletters/pages/2022-02.jpg",
+        "/newsletters/pages/2022-03.jpg",
+        "/newsletters/pages/2022-04.jpg",
+        "/newsletters/pages/2022-05.jpg",
+        "/newsletters/pages/2022-06.jpg",
+        "/newsletters/pages/2022-07.jpg",
+        "/newsletters/pages/2022-08.jpg"
+      ]
+    }
+  ]
+}

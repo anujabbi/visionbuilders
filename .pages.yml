@@ -1,0 +1,225 @@
+# Pages CMS configuration: what Smita and other organizers can edit at app.pagescms.org.
+# Each entry below is one form in the editor and one file in src/content/.
+# Layout, colors and page structure stay in code and are not editable here.
+
+settings:
+  commit:
+    identity: user          # record the editor's name and email on each change
+    templates:
+      update: "Update {filename} via Pages CMS ({userName})"
+      create: "Add {filename} via Pages CMS ({userName})"
+      delete: "Delete {filename} via Pages CMS ({userName})"
+
+media:
+  - name: images
+    label: Photos
+    input: public/images
+    output: /images
+    categories: [image]
+    rename: safe
+  - name: newsletters
+    label: Newsletter pages
+    input: public/newsletters/pages
+    output: /newsletters/pages
+    categories: [image]
+    rename: safe
+
+content:
+  - name: home
+    label: Home page
+    type: file
+    path: src/content/home.json
+    format: json
+    fields:
+      - name: headline
+        label: Headline
+        type: string
+        required: true
+      - name: intro
+        label: Text under the headline
+        type: text
+        required: true
+      - name: why
+        label: Why give with Vision Builders
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: text, label: Text, type: text, required: true }
+      - name: impact_year
+        label: Year shown in "What your donations achieved in …"
+        type: string
+        required: true
+      - name: impact_note
+        label: Note under that heading
+        type: string
+      - name: impact
+        label: Impact numbers (totals across Kutumb and NIPUN)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{number} {label}"
+        fields:
+          - { name: number, label: Number, type: string, required: true }
+          - { name: label, label: What it counts, type: string, required: true }
+          - { name: source, label: Where it comes from (small print), type: string }
+
+  - name: kutumb
+    label: Kutumb page
+    type: file
+    path: src/content/kutumb.json
+    format: json
+    fields:
+      - name: glance
+        label: At a glance numbers
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{number} {label}"
+        fields:
+          - { name: number, label: Number, type: string, required: true }
+          - { name: label, label: What it counts, type: string, required: true }
+      - name: graduates
+        label: Kutumb graduates
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - { name: name, label: "Name and age, e.g. Atul, 22", type: string, required: true }
+          - { name: study, label: Studying or working, type: string, required: true }
+          - { name: note, label: About them, type: text }
+
+  - name: nipun
+    label: NIPUN page
+    type: file
+    path: src/content/nipun.json
+    format: json
+    fields:
+      - name: glance
+        label: At a glance numbers
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{number} {label}"
+        fields:
+          - { name: number, label: Number, type: string, required: true }
+          - { name: label, label: What it counts, type: string, required: true }
+      - name: pillars
+        label: What we support at NIPUN
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: text, label: Text, type: text, required: true }
+          - { name: photo, label: Photo, type: image, options: { media: images } }
+          - { name: photo_description, label: "Photo description (for blind visitors)", type: string }
+      - name: stories
+        label: Trainee stories
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - { name: name, label: Name, type: string, required: true }
+          - { name: text, label: Story, type: text, required: true }
+          - { name: photo, label: Photo (optional), type: image, options: { media: images } }
+          - { name: photo_description, label: "Photo description (for blind visitors)", type: string }
+
+  - name: newsletters
+    label: Annual newsletters
+    type: file
+    path: src/content/newsletters.json
+    format: json
+    fields:
+      - name: issues
+        label: Newsletters (newest year is shown open)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{year} newsletter"
+        fields:
+          - { name: year, label: Year, type: string, required: true }
+          - name: pages
+            label: Pages, in order (one image per page)
+            type: image
+            options:
+              media: newsletters
+              multiple:
+                max: 20
+
+  - name: fundraisers
+    label: Fundraisers
+    type: file
+    path: src/content/fundraisers.json
+    format: json
+    fields:
+      - name: events
+        label: Fundraisers (shown in this order, newest first)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - { name: title, label: Title, type: string, required: true }
+          - { name: when, label: "When and where, e.g. November 21, 2015, Green Brook, New Jersey", type: string }
+          - { name: text, label: Description, type: text, required: true }
+          - { name: button_link, label: Button link (optional), type: string }
+          - { name: button_text, label: Button text, type: string }
+          - name: photos
+            label: Photos
+            type: image
+            options:
+              media: images
+              path: public/images/fundraisers
+              multiple:
+                max: 40
+
+  - name: board
+    label: Board and volunteers
+    type: file
+    path: src/content/board.json
+    format: json
+    fields:
+      - name: members
+        label: People (shown in this order)
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name}, {role}"
+        fields:
+          - { name: name, label: Name, type: string, required: true }
+          - { name: role, label: Role, type: string, required: true }
+          - { name: bio, label: Short bio, type: text }
+
+  - name: settings
+    label: Contact and donation details
+    type: file
+    path: src/content/settings.json
+    format: json
+    fields:
+      - { name: email, label: Contact email, type: string, required: true }
+      - { name: zelle, label: Zelle email, type: string, required: true }
+      - { name: paypal, label: PayPal donate link, type: string, required: true }
+      - { name: address_line_1, label: Mailing address line 1, type: string, required: true }
+      - { name: address_line_2, label: "Mailing address line 2 (city, state, ZIP)", type: string, required: true }
+      - { name: ein, label: EIN, type: string, required: true }
+      - { name: facebook_vision_builders, label: Vision Builders Facebook page, type: string }
+      - { name: facebook_kutumb, label: Kutumb Facebook page, type: string }
+      - { name: facebook_nipun, label: NIPUN Facebook page, type: string }
+      - { name: kutumb_website, label: Kutumb website, type: string }
+      - { name: nipun_website, label: NIPUN website, type: string }

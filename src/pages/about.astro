@@ -1,15 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Cta from '../components/Cta.astro';
+import { BOARD } from '../data/site';
 
-const board = [
-  ['Smita Abbi', 'President', 'Ph.D. in Molecular Medicine from Cornell University. Works in regulatory affairs at a pharmaceutical company.'],
-  ['Bhanu Bahl', 'Board member', 'Ph.D. in Biomedical Informatics from UMDNJ/Rutgers. Works in clinical and translational science informatics at a pharmaceutical company in Boston.'],
-  ['Tavish Bahl', 'Board member', 'M.B.A. from the New York Institute of Technology. Works in treasury and risk management at a global financial consultancy.'],
-  ['Kumarika Banerjee', 'Board member', 'Ph.D. and M.D. from the University of Illinois, Chicago. Practices as an anesthesiologist in New York.'],
-  ['Sunny Srinivasan', 'Board member', 'Ph.D. from the University of New Mexico and M.B.A. from Cornell. Leads product management at a semiconductor equipment company.'],
-  ['Suhani Verma', 'Social media manager', 'Runs our social media as a volunteer.'],
-];
+const board = BOARD.map((m) => [m.name, m.role, m.bio]);
 ---
 <Base title="About us" description="Vision Builders is an all-volunteer nonprofit led by a volunteer board. Meet the people behind it.">
   <section class="page-head">

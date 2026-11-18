@@ -1,0 +1,34 @@
+{
+  "members": [
+    {
+      "name": "Smita Abbi",
+      "role": "President",
+      "bio": "Ph.D. in Molecular Medicine from Cornell University. Works in regulatory affairs at a pharmaceutical company."
+    },
+    {
+      "name": "Bhanu Bahl",
+      "role": "Board member",
+      "bio": "Ph.D. in Biomedical Informatics from UMDNJ/Rutgers. Works in clinical and translational science informatics at a pharmaceutical company in Boston."
+    },
+    {
+      "name": "Tavish Bahl",
+      "role": "Board member",
+      "bio": "M.B.A. from the New York Institute of Technology. Works in treasury and risk management at a global financial consultancy."
+    },
+    {
+      "name": "Kumarika Banerjee",
+      "role": "Board member",
+      "bio": "Ph.D. and M.D. from the University of Illinois, Chicago. Practices as an anesthesiologist in New York."
+    },
+    {
+      "name": "Sunny Srinivasan",
+      "role": "Board member",
+      "bio": "Ph.D. from the University of New Mexico and M.B.A. from Cornell. Leads product management at a semiconductor equipment company."
+    },
+    {
+      "name": "Suhani Verma",
+      "role": "Social media manager",
+      "bio": "Runs our social media as a volunteer."
+    }
+  ]
+}

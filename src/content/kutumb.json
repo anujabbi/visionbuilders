@@ -1,0 +1,70 @@
+{
+  "glance": [
+    {
+      "number": "3,820",
+      "label": "people helped by Clinic on Wheels"
+    },
+    {
+      "number": "4,478",
+      "label": "people treated at the railway station, ghats and clinics"
+    },
+    {
+      "number": "716",
+      "label": "women trained in sewing, beauty, crafts and literacy"
+    },
+    {
+      "number": "136",
+      "label": "children on scholarships"
+    },
+    {
+      "number": "71",
+      "label": "children at the music, dance and theatre school"
+    },
+    {
+      "number": "67",
+      "label": "children in Balwadi preschool"
+    }
+  ],
+  "graduates": [
+    {
+      "name": "Atul, 22",
+      "study": "Law (B.A. LL.B.), St. Wilfred’s College of Law, Jaipur, year 3",
+      "note": "Has lived at Kutumb since he was four. Wants to be a lawyer who stands up for children’s rights."
+    },
+    {
+      "name": "Saloni, 22",
+      "study": "BBA completed, now a sales executive in Noida",
+      "note": "Grew up at Kutumb from age three. Building a career in management and a role model for other girls."
+    },
+    {
+      "name": "Neha, 24",
+      "study": "Master of Social Work, IGNOU",
+      "note": "Inspired by the work she saw at Kutumb, she is training for child protection and community work."
+    },
+    {
+      "name": "Krishna, 21",
+      "study": "B.Tech, Cluster Innovation Centre, University of Delhi, year 2",
+      "note": "Strong in maths and science since childhood. Wants to build software that helps society."
+    },
+    {
+      "name": "Chandan, 20",
+      "study": "Bachelor of Computer Applications, year 2",
+      "note": "Dreams of an MBA and, one day, a software company that creates jobs for young people."
+    },
+    {
+      "name": "Manoj, 20",
+      "study": "B.Sc. Computer Science, Dyal Singh College, University of Delhi",
+      "note": "A gifted musician who wants to perform and mentor young musicians."
+    },
+    {
+      "name": "Mayuri, 20",
+      "study": "B.Com., after Class XII in commerce",
+      "note": "A singer in Kutumb’s cultural programmes who plans to study management."
+    },
+    {
+      "name": "Ketki, 20",
+      "study": "General Nursing and Midwifery, SAS Medical College",
+      "note": "A Kathak dancer training to be a skilled, caring nurse."
+    }
+  ]
+}

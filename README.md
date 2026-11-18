@@ -11,8 +11,28 @@ The Vision Builders website: a static site built with [Astro](https://astro.buil
 | Annual newsletter | `src/pages/newsletter.astro` |
 | Donate | `src/pages/donate.astro` |
 
-Shared facts (address, EIN, emails, PayPal link, Facebook pages) live in **`src/data/site.ts`**. Change them there and every page updates.
+Editable content lives in **`src/content/*.json`** (see below); `src/data/site.ts` turns it into what the pages use.
 Colors and type live in `src/styles/global.css`.
+
+## Editing content (for organizers)
+Smita and other organizers edit the site in the browser with [Pages CMS](https://app.pagescms.org), no code needed.
+What they can edit is defined in `.pages.yml`; the content itself lives in `src/content/*.json`:
+
+| Editor section | File |
+|---|---|
+| Home page (headline, why give, impact numbers) | `src/content/home.json` |
+| Kutumb page (numbers, graduates) | `src/content/kutumb.json` |
+| NIPUN page (numbers, pillars, stories) | `src/content/nipun.json` |
+| Annual newsletters (page images per year) | `src/content/newsletters.json` |
+| Fundraisers (text and photos) | `src/content/fundraisers.json` |
+| Board and volunteers | `src/content/board.json` |
+| Contact and donation details | `src/content/settings.json` |
+
+Every save becomes a commit (with the editor's name) and the site redeploys in about a minute. To undo a change, revert that commit on GitHub.
+
+**Adding a newsletter:** turn each page of the PDF into an image (for example, export pages as JPG at about 1100 px wide), then in Annual newsletters add a year and upload the pages in order.
+
+**One-time setup:** sign in at app.pagescms.org with GitHub, install the Pages CMS GitHub App on this repository only, open the repo, then invite editors by email under Collaborators.
 
 ## Run it locally
 ```bash

@@ -1,36 +1,15 @@
 ---
 import Base from '../layouts/Base.astro';
 import Cta from '../components/Cta.astro';
-import { photos, imageSize } from '../lib/files';
+import { imageSize } from '../lib/files';
+import { FUNDRAISERS } from '../data/site';
 
-// Newest first. To add photos, put them in public/images/fundraisers/<folder>/.
-const events = [
-  {
-    folder: 'clinic-on-wheels',
-    title: 'Clinic on Wheels campaign',
-    when: 'Ongoing',
-    text: 'Volunteer Suhani Verma is raising money online for Clinic on Wheels, the mobile clinic that brings doctors and free medicine to villages around Varanasi.',
-    link: { href: 'https://www.gofundme.com/f/support-vision-builders-clinic-on-wheels', label: 'Give to the campaign' },
-  },
-  {
-    folder: '2016-nyc-marathon',
-    title: 'New York City Marathon',
-    when: 'November 2016',
-    text: 'Board member Arun Verma and other Vision Builders supporters ran the New York City Marathon and raised close to $10,000.',
-  },
-  {
-    folder: '2015-dance-music',
-    title: 'Dance and Music Extravaganza',
-    when: 'November 21, 2015, Green Brook, New Jersey',
-    text: 'A show for kids, by kids, at Green Brook Middle School. All net proceeds went to Kutumb.',
-  },
-  {
-    folder: '2014-benefit-concert',
-    title: 'Benefit concert',
-    when: 'November 22, 2014, Jersey City, New Jersey',
-    text: 'Sanjeev and Armeen Ramabhadran sang classic and contemporary Hindi film music at Saint Peter’s University, with guests requesting songs as pledges. All net proceeds went to Kutumb, a home for abandoned children.',
-  },
-].map((e) => ({ ...e, pics: photos(e.folder) }));
+// Edited in Pages CMS (src/content/fundraisers.json). Listed in the order given there.
+const events = FUNDRAISERS.map((e) => ({
+  ...e,
+  link: e.button_link ? { href: e.button_link, label: e.button_text || 'Learn more' } : undefined,
+  pics: e.photos || [],
+}));
 ---
 <Base title="Fundraisers" description="Concerts, marathons and campaigns that friends of Vision Builders have run for Kutumb and NIPUN.">
   <section class="page-head">
