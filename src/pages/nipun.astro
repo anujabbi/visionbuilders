@@ -4,6 +4,7 @@ import Stats from '../components/Stats.astro';
 import Cta from '../components/Cta.astro';
 import FacebookFeed from '../components/FacebookFeed.astro';
 import { PARTNER_SITES, FACEBOOK } from '../data/site';
+import { imageSize } from '../lib/files';
 
 const fb = FACEBOOK.find((f) => f.key === 'nipun')!;
 const glance: [string, string][] = [
@@ -51,7 +52,7 @@ const stories = [
       <h2>What we support at NIPUN</h2>
       <div class="cards two">
         {pillars.map(([h, p, img, alt]) => (
-          <div class="card"><img src={img} alt={alt} loading="lazy" /><h4>{h}</h4><p>{p}</p></div>
+          <div class="card"><img src={img} alt={alt} loading="lazy" {...imageSize(img)} /><h3>{h}</h3><p>{p}</p></div>
         ))}
       </div>
     </div>
@@ -77,7 +78,7 @@ const stories = [
       <h2>From training to a paycheque</h2>
       <div class="cards three">
         {stories.map(([n, d, img, alt]) => (
-          <div class="card">{img && <img src={img} alt={alt} loading="lazy" />}<h4>{n}</h4><p>{d}</p></div>
+          <div class="card">{img && <img src={img} alt={alt} loading="lazy" {...imageSize(img)} />}<h3>{n}</h3><p>{d}</p></div>
         ))}
       </div>
     </div>

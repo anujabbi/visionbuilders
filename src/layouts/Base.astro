@@ -38,7 +38,7 @@ const ogImage = new URL('/images/kids.jpg', Astro.site).href;
   <header class="top">
     <div class="wrap top-in">
       <a class="logo" href="/" aria-label="Vision Builders home"><img src="/images/logo.jpg" alt="Vision Builders" width="878" height="566" /></a>
-      <a class="btn btn-primary btn-small" href="/donate/">Donate</a>
+      <a class="btn btn-primary btn-small" href="/donate/" aria-current={path === '/donate/' ? 'page' : undefined}>Donate</a>
     </div>
     <nav class="wrap tabs" aria-label="Main">
       {NAV.map((item) => (
@@ -56,7 +56,7 @@ const ogImage = new URL('/images/kids.jpg', Astro.site).href;
       <div>
         <img src="/images/logo.jpg" alt="Vision Builders" width="878" height="566" loading="lazy" />
         <p>{ORG.tagline}</p>
-        <p>All-volunteer 501(c)(3), EIN {ORG.ein}.<br />{ORG.address[0]}, {ORG.address[1]}</p>
+        <p>All-volunteer 501(c)(3), EIN <span class="nowrap">{ORG.ein}</span>.<br />{ORG.address[0]}, {ORG.address[1]}</p>
       </div>
       <div>
         <p><strong>Contact</strong></p>

@@ -32,22 +32,37 @@ a:hover { color: var(--forest); }
 h1, h2, h3, h4 { font-family: var(--display); color: var(--forest); margin: 0; }
 h1, h2 { font-weight: 800; letter-spacing: -0.02em; }
 h3 { font-weight: 700; }
+/* Even out line breaks so big headings don't end on a lone word. */
+h1, h2, h3, h4 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
 p { margin: 0 0 14px; }
+.nowrap { white-space: nowrap; }
 
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
 .narrow { max-width: 780px; }
+/* A narrow reading column keeps the page's left edge, so text doesn't zig-zag
+   between centred and full-width sections. */
+.wrap.narrow { max-width: 1120px; }
+:where(.wrap.narrow) > * { max-width: 740px; }
 .skip { position: absolute; left: -9999px; }
-.skip:focus { left: 12px; top: 12px; z-index: 50; background: var(--white); padding: 10px 14px; }
+.skip:focus { left: 12px; top: 12px; z-index: 50; background: var(--white); padding: 10px 14px; min-height: 44px; display: inline-flex; align-items: center; }
+/* The default green focus ring disappears on green backgrounds. */
+.cta :focus-visible, .foot :focus-visible { outline-color: var(--sun); }
 
 /* Header */
 .top { position: relative; z-index: 20; background: var(--white); border-bottom: 1px solid var(--line); }
 .top-in { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; padding-bottom: 4px; }
 .logo { line-height: 0; }
 .logo img { height: 54px; width: auto; }
-/* On phones all six tabs wrap onto two rows so none are hidden off-screen. */
+/* On phones all six tabs wrap onto two rows so none are hidden off-screen.
+   The tabs' own padding is taken off the left so their text lines up with the logo,
+   and the underline sits on the header's bottom rule. */
 .tabs { display: flex; flex-wrap: wrap; gap: 0 2px; }
+.wrap.tabs { padding-left: 10px; margin-bottom: -1px; }
 .tab { font-size: 15px; color: var(--muted); padding: 10px 10px; min-height: 44px; display: inline-flex; align-items: center; white-space: nowrap; text-decoration: none; border-bottom: 3px solid transparent; }
+.tab:hover { color: var(--forest); border-bottom-color: var(--line); }
 .tab[aria-current='page'] { color: var(--forest); font-weight: 700; border-bottom-color: var(--leaf); }
+.top .btn[aria-current='page'] { box-shadow: inset 0 0 0 2px var(--forest); }
 
 /* Buttons */
 .btn { display: inline-flex; align-items: center; justify-content: center; font: inherit; font-weight: 700; min-height: 50px; padding: 12px 24px; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; }
@@ -63,14 +78,17 @@ p { margin: 0 0 14px; }
 .hero h1 { font-size: 40px; line-height: 1.06; }
 .lede { font-size: 19px; color: var(--muted); margin: 14px 0 0; max-width: 34em; }
 .actions { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
-.hero-media { position: relative; padding-top: 28px; }
-.hero-media::before { content: ''; position: absolute; width: 92%; aspect-ratio: 1; border-radius: 50%; background: var(--sun); left: 4%; top: 0; }
+.hero-media { position: relative; padding-top: 28px; max-width: 560px; }
+.hero-media::before { content: ''; position: absolute; width: 80%; aspect-ratio: 1; border-radius: 50%; background: var(--sun); left: 10%; top: 0; }
 .hero-media img { position: relative; width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: 22px; }
 
 /* Page header for inner pages */
 .page-head { padding: 32px 0 8px; }
 .page-head h1 { font-size: 40px; line-height: 1.05; }
 .page-head .lede { margin-bottom: 4px; }
+.page-head .lede + .small { margin-top: 14px; }
+/* A page that is only a header (the 404) still needs space above the footer. */
+main > .page-head:last-child { padding-bottom: 64px; }
 .page-photo { margin-top: 24px; }
 .page-photo img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 22px; }
 
@@ -79,8 +97,11 @@ p { margin: 0 0 14px; }
 .sec-alt { background: var(--mist); }
 .sec h2 { font-size: 30px; line-height: 1.15; margin-bottom: 22px; }
 .sec h3 { font-size: 22px; margin: 32px 0 8px; }
-.sec h3:first-child { margin-top: 0; }
-.sec p { max-width: 40em; }
+.sec h3:first-child, .sec h2 + h3 { margin-top: 0; }
+.sec h2 + .where { margin-top: -12px; }
+.sec ul:not([class]) { max-width: 38em; padding-left: 1.25em; margin: 0 0 14px; }
+.sec ul:not([class]) li + li { margin-top: 6px; }
+.sec p { max-width: 38em; }
 .intro { color: var(--muted); margin-top: -10px; margin-bottom: 22px; }
 .more { font-weight: 700; display: inline-flex; min-height: 44px; align-items: center; }
 
@@ -98,7 +119,7 @@ p { margin: 0 0 14px; }
 .stats.compact .num { font-size: 36px; }
 
 /* Partner teasers on Home */
-.partners { display: flex; flex-direction: column; gap: 44px; }
+.partner + .partner { margin-top: 44px; }
 .partner { display: grid; gap: 18px; }
 .partner img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 22px; }
 .partner h3 { font-size: 27px; margin: 0; }
@@ -108,10 +129,15 @@ p { margin: 0 0 14px; }
 .cards { display: grid; gap: 14px; margin: 18px 0; }
 .card { background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
 .sec-alt .card { border-color: transparent; }
-.card h4 { font-size: 19px; margin-bottom: 4px; }
+.sec .card h3 { font-size: 19px; line-height: 1.3; margin: 0 0 4px; }
 .card p { margin: 0; }
 .card .meta { color: var(--muted); font-size: 16px; }
-.card img { width: calc(100% + 40px); margin: -18px -20px 14px; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 18px 18px 0 0; }
+.card .meta + p { margin-top: 6px; }
+.card img { width: calc(100% + 40px); max-width: none; height: auto; margin: -18px -20px 14px; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 18px 18px 0 0; }
+/* Keep faces in frame when portrait photos are cropped to landscape. */
+.card img[src$='/tailoring.jpg'] { object-position: 50% 12%; }
+.card img[src$='/parlour.jpg'] { object-position: 50% 78%; }
+.card img[src$='/kids.jpg'] { object-position: 50% 30%; }
 .figure { margin: 28px 0 8px; }
 .figure img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 22px; }
 .figure figcaption { font-size: 15px; color: var(--muted); margin-top: 8px; }
@@ -120,10 +146,11 @@ p { margin: 0 0 14px; }
 /* Facebook feed */
 .fb-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
 .fb-tab { font: inherit; font-size: 15px; border: 2px solid var(--line); background: var(--white); color: var(--forest); border-radius: 999px; padding: 8px 16px; min-height: 44px; cursor: pointer; }
+.fb-tab:hover { border-color: var(--leaf); }
 .fb-tab[aria-selected='true'] { background: var(--forest); border-color: var(--forest); color: var(--white); font-weight: 700; }
 .fb-panel { width: 100%; max-width: 500px; min-height: 120px; }
 .fb-panel iframe { border: 0; display: block; max-width: 100%; background: var(--white); border-radius: 12px; }
-.fb-fallback { font-size: 15px; color: var(--muted); margin-top: 10px; }
+.fb-fallback { font-size: 15px; color: var(--muted); margin: 0 0 12px; }
 
 /* Call to action */
 .cta { background: var(--leaf); padding: 56px 0; }
@@ -134,11 +161,12 @@ p { margin: 0 0 14px; }
 .methods { display: grid; gap: 16px; margin: 28px 0; }
 .method { border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
 .method.main { border: 2px solid var(--leaf); background: var(--mist); }
-.method h2 { font-size: 24px; margin: 0 0 6px; }
+.sec .method h2 { font-size: 24px; line-height: 1.2; margin: 0 0 6px; }
 .method p { margin: 0 0 6px; }
 .tag { font-weight: 700; color: var(--leaf); }
 .detail { font-weight: 700; font-size: 19px; word-break: break-word; }
 .method .btn { margin-top: 10px; }
+.copy:hover { color: var(--forest); }
 .copy { font: inherit; font-size: 15px; font-weight: 700; color: var(--leaf); background: none; border: 0; padding: 8px 0; min-height: 44px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .small { font-size: 15px; color: var(--muted); }
 
@@ -155,11 +183,13 @@ p { margin: 0 0 14px; }
 
 @media (min-width: 900px) {
   body { font-size: 18px; }
+  html { scroll-padding-top: 132px; }
   .top { position: sticky; top: 0; }
   .tabs { flex-wrap: nowrap; }
-  .hero { padding: 40px 0 88px; }
+  .hero { padding: 40px 0 64px; }
   .hero h1 { font-size: 64px; }
   .hero-grid { grid-template-columns: 1.05fr 1fr; align-items: center; gap: 56px; }
+  .hero-media { max-width: none; }
   .hero-media::before { width: 100%; left: 0; top: -6%; }
   .actions { flex-direction: row; }
   .page-head { padding-top: 56px; }
@@ -190,12 +220,20 @@ p { margin: 0 0 14px; }
 @media (min-width: 900px) { .gallery { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; } }
 
 /* Newsletters */
-.year-jump { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; margin-top: 18px; font-size: 16px; }
+.year-jump { display: flex; flex-wrap: wrap; gap: 0 12px; align-items: center; margin-top: 18px; font-size: 16px; }
 .year-jump span { color: var(--muted); }
 .year-jump a { font-weight: 700; display: inline-flex; min-height: 44px; align-items: center; }
 .issue { border-top: 2px solid var(--line); padding: 4px 0; }
 .issue:last-child { border-bottom: 2px solid var(--line); }
-.issue summary { cursor: pointer; font-family: var(--display); font-weight: 700; font-size: 22px; padding: 14px 0; min-height: 44px; list-style-position: outside; }
+.issue { scroll-margin-top: 12px; }
+.issue summary { cursor: pointer; font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.25; padding: 16px 0; min-height: 44px; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.issue summary::-webkit-details-marker { display: none; }
+.issue summary::after { content: '+'; flex: none; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--line); font-size: 24px; line-height: 1; color: var(--leaf); }
+.issue[open] summary::after { content: '\2212'; background: var(--mist); }
+.issue summary:hover { color: var(--leaf); }
+.issue summary:hover::after { border-color: var(--leaf); }
 .pages { display: grid; gap: 14px; padding: 6px 0 22px; }
 .pages img { width: 100%; height: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--white); }
-.gallery a { display: block; }
+.gallery a { display: block; border-radius: 12px; }
+.gallery a:hover img, .pages a:hover img { opacity: 0.9; }
+.gallery .tall img { object-fit: contain; background: #111; }
