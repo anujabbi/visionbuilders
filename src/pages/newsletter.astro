@@ -1,38 +1,16 @@
 ---
 import Base from '../layouts/Base.astro';
-import Stats from '../components/Stats.astro';
-import Cta from '../components/Cta.astro';
-import { ORG, IMPACT_2026 } from '../data/site';
 import { newsletterPages } from '../lib/files';
 
-const pdf = '/newsletters/vision-builders-2026-annual-newsletter.pdf';
-const kutumb: [string, string][] = [
-  ['67', 'children attended Balwadi preschool'],
-  ['136', 'children supported by scholarships'],
-  ['71', 'children at the Sangat Mahavidyalay arts school'],
-  ['8', 'Kutumb graduates in higher education'],
-  ['716', 'women trained in vocational programs'],
-  ['3,820', 'people helped by Clinic on Wheels'],
-  ['4,478', 'people helped by other health programs'],
-];
-const nipun: [string, string][] = [
-  ['402', 'children in the daily nutrition program'],
-  ['128', 'children moved into government schools'],
-  ['25', 'girls on higher-education scholarships'],
-  ['661', 'youth trained at UMANG and UMANG II'],
-  ['454', 'trainees now in jobs or their own business'],
-];
-// Every year with page images in public/newsletters/pages appears automatically.
+// Every year with page images in public/newsletters/pages appears automatically, newest first.
 const issues = newsletterPages();
-const current = issues.find((i) => i.year === '2026');
-const past = issues.filter((i) => i.year !== '2026');
+const latest = issues[0]?.year;
 ---
-<Base title="Annual newsletters" description="Vision Builders’ annual newsletters: results from Kutumb in Varanasi and NIPUN in New Delhi, from 2022 to 2026.">
+<Base title="Annual newsletters" description="Vision Builders’ annual newsletters: results from Kutumb in Varanasi and NIPUN in New Delhi.">
   <section class="page-head">
     <div class="wrap narrow">
-      <h1>2026 Annual Newsletter</h1>
-      <p class="lede">Vision Builders has continued to help underprivileged children, women and communities through our support of Kutumb and NIPUN. Here is what your donations achieved this year.</p>
-      <p class="small">Kutumb figures cover October 2025 to September 2026. NIPUN figures cover November 2025 to October 2026.</p>
+      <h1>Annual newsletters</h1>
+      <p class="lede">Every year we share what your donations achieved through our partners, Kutumb in Varanasi and NIPUN in New Delhi.</p>
       <nav class="year-jump" aria-label="Newsletters by year">
         <span>Jump to:</span>
         {issues.map((i) => <a href={`#nl-${i.year}`}>{i.year}</a>)}
@@ -40,76 +18,29 @@ const past = issues.filter((i) => i.year !== '2026');
     </div>
   </section>
 
-  <section class="sec">
-    <div class="wrap">
-      <h2>Across both partners</h2>
-      <Stats items={IMPACT_2026} />
-    </div>
-  </section>
-
-  <section class="sec sec-alt">
-    <div class="wrap">
-      <h2>Kutumb, Varanasi</h2>
-      <Stats items={kutumb} compact />
-      <div class="wrap narrow" style="padding:0;margin:24px 0 0">
-        <p>Eight young people who grew up at Kutumb are now in higher education, studying law, technology, nursing, commerce and social work. One has finished her degree and started her career. Clinic on Wheels held 122 camps, and the women’s production unit earned ₹99,000 from its sales.</p>
-        <a class="more" href="/kutumb/">Read the full Kutumb story and meet the graduates</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec">
-    <div class="wrap">
-      <h2>NIPUN, New Delhi</h2>
-      <Stats items={nipun} compact />
-      <div class="wrap narrow" style="padding:0;margin:24px 0 0">
-        <p>Every child in NIPUN’s nutrition program also attends preschool or remedial classes. UMANG II in Kapashera set out to train 200 girls and women and registered 252, and 176 of them are already earning.</p>
-        <a class="more" href="/nipun/">Read the full NIPUN story and trainees’ stories</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="sec sec-alt">
-    <div class="wrap narrow letter">
-      <h2>A note from Smita</h2>
-      <p>Thank you for helping the children and families in these communities.</p>
-      <p>We are also looking for ways to help children in other parts of the world, especially in Africa. Please share any ideas, and reach out if you’d like to get involved or learn more.</p>
-      <p class="sign">Smita Abbi<br />President, Vision Builders Inc.</p>
-    </div>
-  </section>
-
-  {current && (
-    <section class="sec" id="nl-2026">
-      <div class="wrap narrow">
-        <details class="issue">
-          <summary>See the 2026 newsletter as printed ({current.pages.length} pages)</summary>
-          <div class="pages">
-            {current.pages.map((src, n) => (
-              <a href={src}><img src={src} alt={`2026 newsletter, page ${n + 1}`} loading="lazy" width="1100" height="1424" /></a>
-            ))}
-          </div>
-          <p class="small"><a href={pdf} download>Download the PDF</a></p>
-        </details>
-      </div>
-    </section>
-  )}
-
-  <section class="sec sec-alt">
+  <section class="sec" style="padding-top:16px">
     <div class="wrap narrow">
-      <h2>Earlier newsletters</h2>
-      <p class="intro">Tap a page to see it full size.</p>
-      {past.map((issue, i) => (
-        <details class="issue" id={`nl-${issue.year}`} open={i === 0}>
+      <p class="small">Tap a page to see it full size.</p>
+      {issues.map((issue) => (
+        <details class="issue" id={`nl-${issue.year}`} open={issue.year === latest}>
           <summary>{issue.year} Annual Newsletter</summary>
           <div class="pages">
             {issue.pages.map((src, n) => (
-              <a href={src}><img src={src} alt={`${issue.year} newsletter, page ${n + 1}`} loading="lazy" width="1100" height="1424" /></a>
+              <a href={src}><img src={src} alt={`${issue.year} newsletter, page ${n + 1}`} loading={issue.year === latest && n === 0 ? 'eager' : 'lazy'} width="1100" height="1424" /></a>
             ))}
           </div>
         </details>
       ))}
     </div>
   </section>
-
-  <Cta />
 </Base>
+
+<script>
+  // Opening a year from the "Jump to" links expands it.
+  const openFromHash = () => {
+    const el = location.hash && document.querySelector<HTMLDetailsElement>(location.hash);
+    if (el && el.tagName === 'DETAILS') el.open = true;
+  };
+  window.addEventListener('hashchange', openFromHash);
+  openFromHash();
+</script>
