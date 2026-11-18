@@ -38,8 +38,20 @@ const ogImage = new URL('/images/kids.jpg', Astro.site).href;
   <header class="top">
     <div class="wrap top-in">
       <a class="logo" href="/" aria-label="Vision Builders home"><img src="/images/logo.jpg" alt="Vision Builders" width="878" height="566" /></a>
-      <a class="btn btn-primary btn-small" href="/donate/" aria-current={path === '/donate/' ? 'page' : undefined}>Donate</a>
+      <div class="top-actions">
+        <a class="btn btn-primary btn-small" href="/donate/" aria-current={path === '/donate/' ? 'page' : undefined}>Donate</a>
+        {/* Phones: one header row, with the six links behind a Menu button (native <details>, no JavaScript). */}
+        <details class="menu">
+          <summary class="btn btn-ghost btn-small menu-btn"><span class="menu-icon" aria-hidden="true"></span>Menu</summary>
+          <nav class="menu-panel" aria-label="Main">
+            {NAV.map((item) => (
+              <a class="menu-link" href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>
+            ))}
+          </nav>
+        </details>
+      </div>
     </div>
+    {/* Desktop: the tabs, always visible. */}
     <nav class="wrap tabs" aria-label="Main">
       {NAV.map((item) => (
         <a class="tab" href={item.href} aria-current={path === item.href ? 'page' : undefined}>{item.label}</a>

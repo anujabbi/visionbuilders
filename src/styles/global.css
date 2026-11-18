@@ -51,13 +51,27 @@ p { margin: 0 0 14px; }
 
 /* Header */
 .top { position: relative; z-index: 20; background: var(--white); border-bottom: 1px solid var(--line); }
-.top-in { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; padding-bottom: 4px; }
+.top-in { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 10px; padding-bottom: 10px; }
+.top-actions { display: flex; align-items: center; gap: 8px; }
 .logo { line-height: 0; }
 .logo img { height: 54px; width: auto; }
-/* On phones all six tabs wrap onto two rows so none are hidden off-screen.
-   The tabs' own padding is taken off the left so their text lines up with the logo,
-   and the underline sits on the header's bottom rule. */
-.tabs { display: flex; flex-wrap: wrap; gap: 0 2px; }
+/* Phones: the six links sit behind a Menu button, so the header stays one row. */
+.menu > summary { list-style: none; }
+.menu > summary::-webkit-details-marker { display: none; }
+.menu-btn { gap: 8px; padding-left: 16px; padding-right: 16px; user-select: none; }
+.menu[open] > .menu-btn { background: var(--forest); color: var(--white); }
+.menu-icon { width: 16px; height: 2px; background: currentColor; border-radius: 2px; box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor; }
+.menu[open] .menu-icon { box-shadow: none; transform: rotate(45deg); }
+.menu[open] .menu-icon::after { content: ''; display: block; width: 16px; height: 2px; background: currentColor; border-radius: 2px; transform: rotate(90deg); }
+.menu-panel { position: absolute; left: 0; right: 0; top: 100%; background: var(--white); border-bottom: 1px solid var(--line); box-shadow: 0 12px 24px rgba(16, 48, 28, 0.12); padding: 4px 20px 12px; }
+.menu-link { display: flex; align-items: center; min-height: 52px; font-size: 18px; color: var(--forest); text-decoration: none; border-bottom: 1px solid var(--line); padding-left: 12px; border-left: 4px solid transparent; }
+.menu-link:last-child { border-bottom: 0; }
+.menu-link:hover { color: var(--leaf); }
+.menu-link[aria-current='page'] { font-weight: 700; border-left-color: var(--leaf); }
+
+/* Desktop: the tabs. Their own padding is taken off the left so the text lines up
+   with the logo, and the underline sits on the header's bottom rule. */
+.tabs { display: none; gap: 0 2px; }
 .wrap.tabs { padding-left: 10px; margin-bottom: -1px; }
 .tab { font-size: 15px; color: var(--muted); padding: 10px 10px; min-height: 44px; display: inline-flex; align-items: center; white-space: nowrap; text-decoration: none; border-bottom: 3px solid transparent; }
 .tab:hover { color: var(--forest); border-bottom-color: var(--line); }
@@ -185,7 +199,9 @@ main > .page-head:last-child { padding-bottom: 64px; }
   body { font-size: 18px; }
   html { scroll-padding-top: 132px; }
   .top { position: sticky; top: 0; }
-  .tabs { flex-wrap: nowrap; }
+  .top-in { padding-bottom: 4px; }
+  .menu { display: none; }
+  .tabs { display: flex; }
   .hero { padding: 40px 0 64px; }
   .hero h1 { font-size: 64px; }
   .hero-grid { grid-template-columns: 1.05fr 1fr; align-items: center; gap: 56px; }
