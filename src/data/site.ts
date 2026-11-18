@@ -44,11 +44,11 @@ export const PARTNER_SITES = {
 
 export const NAV = [
   { href: '/', label: 'Home' },
-  { href: '/about/', label: 'Who we are' },
   { href: '/kutumb/', label: 'Kutumb' },
   { href: '/nipun/', label: 'NIPUN' },
   { href: '/newsletter/', label: 'Newsletter' },
   { href: '/fundraisers/', label: 'Fundraisers' },
+  { href: '/about/', label: 'About us' },
 ];
 
 // Combined across both partners. Each note shows where the total comes from.
