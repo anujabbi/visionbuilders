@@ -1,0 +1,6 @@
+# Put this file in Bluehost's public_html (back up the old WordPress files first).
+# It sends every visit to the bare domain to the new site on www, keeping the path,
+# so old links like visionbuilders.org/donate-now/ still land on the right page.
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^visionbuilders\.org$ [NC]
+RewriteRule ^(.*)$ https://www.visionbuilders.org/$1 [R=301,L]

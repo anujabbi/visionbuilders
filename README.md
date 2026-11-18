@@ -42,12 +42,14 @@ npm run build    # outputs to dist/
 ```
 
 ## Deploy (one-time setup)
-The site is served by Cloudflare Workers as static files (config in `wrangler.jsonc`).
-1. In the Cloudflare dashboard: Workers & Pages > Create > Import a repository, and pick this repo.
-2. Build command: `npm run build`. Deploy command: `npx wrangler deploy`. Leave the rest as is.
-3. After the first deploy you get a `visionbuilders.<account>.workers.dev` link. Check it on a phone.
-4. Then add `visionbuilders.org` and `www.visionbuilders.org` under the Worker's Settings > Domains & Routes. Cloudflare walks you through the DNS change.
-5. Every push to `main` now redeploys automatically.
+The site runs on **Cloudflare Pages** at `www.visionbuilders.org`. DNS and email stay at Bluehost.
+1. Cloudflare dashboard: Workers & Pages > Create > Pages > Connect to Git, pick this repo.
+   Build command `npm run build`, output directory `dist`.
+2. In the Pages project: Custom domains > Set up a domain > `www.visionbuilders.org` (do this before step 3).
+3. At Bluehost DNS: make `www` a CNAME to `visionbuilders.pages.dev` (remove any old `www` A record). Leave MX/TXT/mail records alone.
+4. At Bluehost: redirect the bare domain `visionbuilders.org` to `https://www.visionbuilders.org`
+   (Bluehost Redirects tool, or `bluehost/.htaccess` from this repo placed in `public_html`).
+5. Every push to `main` now redeploys automatically, with a preview link for every branch.
 
 `public/_redirects` sends old WordPress addresses (like `/donate-now/` and `/kutumb-project/`) to the new pages.
 
