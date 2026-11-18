@@ -28,7 +28,7 @@ const events = [
     folder: '2014-benefit-concert',
     title: 'Benefit concert',
     when: 'November 22, 2014, Jersey City, New Jersey',
-    text: 'A concert at Saint Peter’s University, with guests requesting songs as pledges for Kutumb. All net proceeds went to Kutumb.',
+    text: 'Sanjeev and Armeen Ramabhadran sang classic and contemporary Hindi film music at Saint Peter’s University, with guests requesting songs as pledges. All net proceeds went to Kutumb, a home for abandoned children.',
   },
 ].map((e) => ({ ...e, pics: photos(e.folder) }));
 ---
@@ -52,7 +52,7 @@ const events = [
         </div>
         {e.pics.length > 0 && (
           <div class="gallery">
-            {e.pics.map((src) => <img src={src} alt={`${e.title} photo`} loading="lazy" />)}
+            {e.pics.map((src, n) => <a href={src}><img src={src} alt={`${e.title}, photo ${n + 1}`} loading="lazy" /></a>)}
           </div>
         )}
       </div>

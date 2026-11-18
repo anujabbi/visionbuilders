@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import Stats from '../components/Stats.astro';
 import Cta from '../components/Cta.astro';
 import { ORG, IMPACT_2026 } from '../data/site';
-import { newsletters } from '../lib/files';
+import { newsletterPages } from '../lib/files';
 
 const pdf = '/newsletters/vision-builders-2026-annual-newsletter.pdf';
 const kutumb: [string, string][] = [
@@ -22,18 +22,21 @@ const nipun: [string, string][] = [
   ['661', 'youth trained at UMANG and UMANG II'],
   ['454', 'trainees now in jobs or their own business'],
 ];
-// Every PDF in public/newsletters shows up in the archive automatically.
-const archive = newsletters().filter((n) => n.href !== pdf);
+// Every year with page images in public/newsletters/pages appears automatically.
+const issues = newsletterPages();
+const current = issues.find((i) => i.year === '2026');
+const past = issues.filter((i) => i.year !== '2026');
 ---
-<Base title="2026 Annual Newsletter" description="Vision Builders’ 2026 annual newsletter: results from Kutumb in Varanasi and NIPUN in New Delhi.">
+<Base title="Annual newsletters" description="Vision Builders’ annual newsletters: results from Kutumb in Varanasi and NIPUN in New Delhi, from 2022 to 2026.">
   <section class="page-head">
     <div class="wrap narrow">
       <h1>2026 Annual Newsletter</h1>
       <p class="lede">Vision Builders has continued to help underprivileged children, women and communities through our support of Kutumb and NIPUN. Here is what your donations achieved this year.</p>
       <p class="small">Kutumb figures cover October 2025 to September 2026. NIPUN figures cover November 2025 to October 2026.</p>
-      <div class="links">
-        <a class="btn btn-primary" href={pdf} download>Download the newsletter (PDF, 4 MB)</a>
-      </div>
+      <nav class="year-jump" aria-label="Newsletters by year">
+        <span>Jump to:</span>
+        {issues.map((i) => <a href={`#nl-${i.year}`}>{i.year}</a>)}
+      </nav>
     </div>
   </section>
 
@@ -75,14 +78,36 @@ const archive = newsletters().filter((n) => n.href !== pdf);
     </div>
   </section>
 
-  <section class="sec">
+  {current && (
+    <section class="sec" id="nl-2026">
+      <div class="wrap narrow">
+        <details class="issue">
+          <summary>See the 2026 newsletter as printed ({current.pages.length} pages)</summary>
+          <div class="pages">
+            {current.pages.map((src, n) => (
+              <a href={src}><img src={src} alt={`2026 newsletter, page ${n + 1}`} loading="lazy" width="1100" height="1424" /></a>
+            ))}
+          </div>
+          <p class="small"><a href={pdf} download>Download the PDF</a></p>
+        </details>
+      </div>
+    </section>
+  )}
+
+  <section class="sec sec-alt">
     <div class="wrap narrow">
       <h2>Earlier newsletters</h2>
-      {archive.length > 0 ? (
-        <div class="links">{archive.map((a) => <a class="btn btn-ghost" href={a.href} download>{a.year} newsletter (PDF)</a>)}</div>
-      ) : (
-        <p>Looking for an earlier year? Email <a href={`mailto:${ORG.email}`}>{ORG.email}</a> and we’ll send it.</p>
-      )}
+      <p class="intro">Tap a page to see it full size.</p>
+      {past.map((issue, i) => (
+        <details class="issue" id={`nl-${issue.year}`} open={i === 0}>
+          <summary>{issue.year} Annual Newsletter</summary>
+          <div class="pages">
+            {issue.pages.map((src, n) => (
+              <a href={src}><img src={src} alt={`${issue.year} newsletter, page ${n + 1}`} loading="lazy" width="1100" height="1424" /></a>
+            ))}
+          </div>
+        </details>
+      ))}
     </div>
   </section>
 
